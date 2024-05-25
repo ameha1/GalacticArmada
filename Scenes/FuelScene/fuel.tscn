@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://swnbao0y2sa0"]
+
+[ext_resource type="Texture2D" uid="uid://dpvx1fr5tag0" path="res://Assets/PNG/Sprites/Effects/spaceEffects_017.png" id="1_0tlkt"]
+
+[node name="Fuel" type="CPUParticles2D"]
+position = Vector2(-6, 31)
+scale = Vector2(0.8, 0.8)
+amount = 3
+lifetime = 0.2
+local_coords = true
+texture = ExtResource("1_0tlkt")
+color = Color(1, 0.164706, 0.360784, 1)

@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6mrl8mqj1l8c"]
+
+[ext_resource type="FontFile" uid="uid://dey34fpcbngt1" path="res://Assets/Fonts/Kenney Blocks.ttf" id="1_rpnle"]
+
+[node name="VBoxContainer" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 3.45
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="GameOver" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.686275, 0.164706, 0.360784, 1)
+theme_override_fonts/font = ExtResource("1_rpnle")
+theme_override_font_sizes/font_size = 45
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayAgain" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0.968627)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.686275, 0.607843, 0.360784, 1)
+theme_override_fonts/font = ExtResource("1_rpnle")
+theme_override_font_sizes/font_size = 30
+text = "Play Again
+"
+flat = true
+
+[node name="About" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0.968627)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.686275, 0.607843, 0.360784, 1)
+theme_override_fonts/font = ExtResource("1_rpnle")
+theme_override_font_sizes/font_size = 30
+text = "About"
+flat = true
+
+[node name="Exit" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0.968627)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.686275, 0.607843, 0.376471, 1)
+theme_override_fonts/font = ExtResource("1_rpnle")
+theme_override_font_sizes/font_size = 30
+text = "Exit"
+flat = true

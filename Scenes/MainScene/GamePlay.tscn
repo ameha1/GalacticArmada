@@ -1,0 +1,110 @@
+[gd_scene load_steps=12 format=3 uid="uid://drev0g4nbcp2u"]
+
+[ext_resource type="Script" path="res://Scripts/GamePlay.gd" id="1_1e743"]
+[ext_resource type="PackedScene" uid="uid://b2tj4hphbtqry" path="res://Scenes/PlayerScene/Player.tscn" id="1_b1rdn"]
+[ext_resource type="Texture2D" uid="uid://danien45jmttp" path="res://Assets/PNG/Sprites/darkBackGround.jpg" id="1_fmdpq"]
+[ext_resource type="Texture2D" uid="uid://d2lgywsciw5te" path="res://Assets/Partcles/star_08.png" id="2_lybst"]
+[ext_resource type="PackedScene" uid="uid://jm04dohbskx7" path="res://Scenes/GameOverScene/game_over.tscn" id="2_nrllv"]
+[ext_resource type="Script" path="res://Scripts/Spawner.gd" id="5_gdaym"]
+[ext_resource type="PackedScene" uid="uid://b0fcmcb4wdou5" path="res://Scenes/HUD/hud.tscn" id="5_wovpq"]
+[ext_resource type="Texture2D" uid="uid://yjcynmghdrkk" path="res://Assets/Partcles/star_04.png" id="6_ihxsk"]
+[ext_resource type="Script" path="res://Scripts/View.gd" id="9_8rtis"]
+
+[sub_resource type="Animation" id="Animation_gprhp"]
+resource_name = "opening_scene"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(215, 800), Vector2(215, 545)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yjh7r"]
+_data = {
+"opening_scene": SubResource("Animation_gprhp")
+}
+
+[node name="GamePlay" type="Node"]
+script = ExtResource("1_1e743")
+max_starSpeed = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("5_wovpq")]
+
+[node name="GameOver" parent="CanvasLayer" instance=ExtResource("2_nrllv")]
+visible = false
+
+[node name="DarkBackGround" type="Sprite2D" parent="."]
+z_index = -100
+position = Vector2(46, 40)
+scale = Vector2(0.16158, 0.1625)
+texture = ExtResource("1_fmdpq")
+centered = false
+offset = Vector2(-300, -250)
+
+[node name="stars" type="CPUParticles2D" parent="DarkBackGround"]
+position = Vector2(1039.73, -713.846)
+amount = 20
+lifetime = 8.0
+speed_scale = 0.5
+local_coords = true
+texture = ExtResource("2_lybst")
+emission_shape = 3
+emission_rect_extents = Vector2(1400, 1)
+spread = 90.0
+gravity = Vector2(0, 200)
+initial_velocity_min = 1.0
+initial_velocity_max = 100.0
+angular_velocity_min = 10.0
+angular_velocity_max = 25.0
+scale_amount_min = 0.25
+scale_amount_max = 0.3
+
+[node name="stars2" type="CPUParticles2D" parent="DarkBackGround"]
+position = Vector2(1021.17, -332.308)
+amount = 10
+lifetime = 8.0
+speed_scale = 0.25
+local_coords = true
+texture = ExtResource("6_ihxsk")
+emission_shape = 3
+emission_rect_extents = Vector2(1400, 1)
+spread = 90.0
+gravity = Vector2(0, 200)
+initial_velocity_min = 1.0
+initial_velocity_max = 100.0
+angular_velocity_min = 10.0
+angular_velocity_max = 25.0
+scale_amount_min = 0.25
+scale_amount_max = 0.3
+
+[node name="Player" parent="." instance=ExtResource("1_b1rdn")]
+z_index = 100
+position = Vector2(215, 800)
+
+[node name="Spawner" type="Node2D" parent="."]
+position = Vector2(237, -288)
+script = ExtResource("5_gdaym")
+
+[node name="spawnTimer" type="Timer" parent="Spawner"]
+wait_time = 8.0
+
+[node name="openingScene" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yjh7r")
+}
+
+[node name="View" type="Camera2D" parent="."]
+anchor_mode = 0
+script = ExtResource("9_8rtis")
+
+[connection signal="timeout" from="Spawner/spawnTimer" to="Spawner" method="_on_spawn_timer_timeout"]
+[connection signal="animation_finished" from="openingScene" to="." method="_on_opening_scene_animation_finished"]

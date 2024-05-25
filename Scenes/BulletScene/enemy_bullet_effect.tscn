@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c45fhjyn67dvj"]
+
+[ext_resource type="PackedScene" uid="uid://pk8cl4ttv474" path="res://Scenes/BulletScene/bullet_effect.tscn" id="1_bjecx"]
+
+[node name="BulletEffect" instance=ExtResource("1_bjecx")]
+modulate = Color(0.686275, 0.258824, 0.376471, 1)

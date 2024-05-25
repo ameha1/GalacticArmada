@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bg6bt0pwudqcf"]
+
+[ext_resource type="PackedScene" uid="uid://cb7c5rvtn0yfc" path="res://Scenes/EnemyScene/enemy.tscn" id="1_8cntn"]
+[ext_resource type="Script" path="res://Scripts/bouncer_enemy.gd" id="2_h05dg"]
+[ext_resource type="Texture2D" uid="uid://cnl2asgalwwre" path="res://Assets/PNG/Sprites/Ships/spaceShips_006.png" id="3_rlvfk"]
+
+[node name="BouncerEnemy" instance=ExtResource("1_8cntn")]
+script = ExtResource("2_h05dg")
+horizontalSpeed = 20
+bouncerspeed = 45
+
+[node name="SpaceShips003" parent="." index="0"]
+texture = ExtResource("3_rlvfk")
+flip_v = true
+
+[node name="CollisionPolygon2D" parent="." index="1"]
+polygon = PackedVector2Array(-26, -22, -10, -42, -5, -33, -5, -24, 0, -29, 5, -25, 5, -33, 9, -42, 27, -20, 22, 8, 10, 15, 10, 38, -10, 38, -10, 15, -21, 9)
+
+[node name="Fuel" parent="." index="6"]
+position = Vector2(3.55271e-14, -27)
+amount = 6
+color = Color(0.823529, 0, 0.184314, 1)
