@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=3 uid="uid://csgc2ma3qp3wa"]
+
+[ext_resource type="Script" path="res://Scripts/credits.gd" id="1_lv60c"]
+[ext_resource type="FontFile" uid="uid://dey34fpcbngt1" path="res://Assets/Fonts/Kenney Blocks.ttf" id="1_p3xxo"]
+
+[sub_resource type="Animation" id="Animation_t78h2"]
+resource_name = "mover"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 800), Vector2(0, 100)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yrcg7"]
+_data = {
+"mover": SubResource("Animation_t78h2")
+}
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lv60c")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 100.0
+offset_bottom = 252.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="credit" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.739079, 0.585402, 0.334198, 1)
+theme_override_fonts/font = ExtResource("1_p3xxo")
+theme_override_font_sizes/font_size = 24
+text = "Credits :"
+horizontal_alignment = 1
+
+[node name="Content" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.686275, 0.258824, 0.376471, 1)
+theme_override_fonts/font = ExtResource("1_p3xxo")
+theme_override_font_sizes/font_size = 24
+text = "Developer - Ameha
+programmer - ameha
+Design and Art from - Kenney"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_p3xxo")
+theme_override_font_sizes/font_size = 24
+text = "Back"
+flat = true
+
+[node name="player" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yrcg7")
+}
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
