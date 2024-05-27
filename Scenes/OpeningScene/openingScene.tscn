@@ -1,0 +1,103 @@
+[gd_scene load_steps=7 format=3 uid="uid://caqsi7joprpbj"]
+
+[ext_resource type="Script" path="res://Scripts/openingScene.gd" id="1_1pi0d"]
+[ext_resource type="Texture2D" uid="uid://danien45jmttp" path="res://Assets/PNG/Sprites/darkBackGround.jpg" id="1_tgwkr"]
+[ext_resource type="Texture2D" uid="uid://d2lgywsciw5te" path="res://Assets/Partcles/star_08.png" id="2_1bs2b"]
+[ext_resource type="FontFile" uid="uid://dey34fpcbngt1" path="res://Assets/Fonts/Kenney Blocks.ttf" id="3_iee6d"]
+
+[sub_resource type="Animation" id="Animation_btv8r"]
+resource_name = "cruise"
+length = 5.0
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nrd7n"]
+_data = {
+"cruise": SubResource("Animation_btv8r")
+}
+
+[node name="OpeningScene" type="Node"]
+script = ExtResource("1_1pi0d")
+
+[node name="BackGround" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_tgwkr")
+expand_mode = 1
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="BackGround"]
+position = Vector2(220, -38)
+scale = Vector2(0.06, 0.06)
+amount = 30
+lifetime = 10.0
+speed_scale = 0.7
+randomness = 0.6
+local_coords = true
+texture = ExtResource("2_1bs2b")
+emission_shape = 3
+emission_rect_extents = Vector2(3000, 0)
+spread = 90.0
+initial_velocity_min = 1.0
+initial_velocity_max = 100.0
+angular_velocity_min = 10.0
+angular_velocity_max = 25.0
+damping_min = 1.0
+damping_max = 10.0
+anim_speed_max = 25.89
+
+[node name="GalacticArmada" type="Label" parent="."]
+offset_left = 83.0
+offset_top = 87.0
+offset_right = 361.0
+offset_bottom = 126.0
+theme_override_colors/font_color = Color(0.686275, 0.258824, 0.376471, 1)
+theme_override_colors/font_shadow_color = Color(0.237834, 0.0345144, 0.119797, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 1
+theme_override_constants/line_spacing = 1
+theme_override_fonts/font = ExtResource("3_iee6d")
+theme_override_font_sizes/font_size = 25
+text = "Galactic Armada"
+
+[node name="Container" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Play" type="Button" parent="Container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.686275, 0.258824, 0.376471, 1)
+theme_override_fonts/font = ExtResource("3_iee6d")
+theme_override_font_sizes/font_size = 20
+text = "Play"
+
+[node name="About" type="Button" parent="Container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.686275, 0.258824, 0.376471, 1)
+theme_override_fonts/font = ExtResource("3_iee6d")
+theme_override_font_sizes/font_size = 20
+text = "About"
+
+[node name="Exit" type="Button" parent="Container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.686275, 0.258824, 0.376471, 1)
+theme_override_fonts/font = ExtResource("3_iee6d")
+theme_override_font_sizes/font_size = 20
+text = "Exit
+"
+
+[node name="cruise" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nrd7n")
+}
+
+[connection signal="pressed" from="Container/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Container/About" to="." method="_on_about_pressed"]
+[connection signal="pressed" from="Container/Exit" to="." method="_on_exit_pressed"]
