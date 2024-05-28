@@ -1,9 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://caqsi7joprpbj"]
+[gd_scene load_steps=11 format=3 uid="uid://caqsi7joprpbj"]
 
 [ext_resource type="Script" path="res://Scripts/openingScene.gd" id="1_1pi0d"]
 [ext_resource type="Texture2D" uid="uid://danien45jmttp" path="res://Assets/PNG/Sprites/darkBackGround.jpg" id="1_tgwkr"]
 [ext_resource type="Texture2D" uid="uid://d2lgywsciw5te" path="res://Assets/Partcles/star_08.png" id="2_1bs2b"]
 [ext_resource type="FontFile" uid="uid://dey34fpcbngt1" path="res://Assets/Fonts/Kenney Blocks.ttf" id="3_iee6d"]
+[ext_resource type="Texture2D" uid="uid://baayiet5rfu7m" path="res://Assets/PNG/Sprites/Station/spaceStation_024.png" id="5_qcq06"]
+[ext_resource type="Texture2D" uid="uid://dlmrr74mr7hst" path="res://Assets/PNG/Sprites/Station/spaceStation_028.png" id="6_l2er2"]
+[ext_resource type="Texture2D" uid="uid://c6l1eyp05myke" path="res://Assets/PNG/Sprites/Station/spaceStation_015.png" id="7_gsiid"]
+[ext_resource type="PackedScene" uid="uid://swnbao0y2sa0" path="res://Scenes/FuelScene/fuel.tscn" id="8_lu7v5"]
 
 [sub_resource type="Animation" id="Animation_btv8r"]
 resource_name = "cruise"
@@ -66,6 +70,10 @@ text = "Galactic Armada"
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -6.0
+offset_right = 1.0
+offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
@@ -97,6 +105,40 @@ text = "Exit
 libraries = {
 "": SubResource("AnimationLibrary_nrd7n")
 }
+
+[node name="station" type="Sprite2D" parent="."]
+position = Vector2(334, 297)
+
+[node name="SpaceStation024" type="Sprite2D" parent="station"]
+modulate = Color(1, 1, 1, 0.529412)
+position = Vector2(32, 148)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_qcq06")
+
+[node name="SpaceStation028" type="Sprite2D" parent="station"]
+modulate = Color(1, 1, 1, 0.529412)
+position = Vector2(34, 34)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_l2er2")
+
+[node name="SpaceStation015" type="Sprite2D" parent="station"]
+modulate = Color(1, 1, 1, 0.529412)
+position = Vector2(52, 257)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_gsiid")
+flip_h = true
+
+[node name="Fuel" parent="station" instance=ExtResource("8_lu7v5")]
+position = Vector2(92, 256)
+rotation = -1.5708
+
+[node name="Fuel2" parent="station" instance=ExtResource("8_lu7v5")]
+position = Vector2(92, 250)
+rotation = -1.5708
+
+[node name="Fuel3" parent="station" instance=ExtResource("8_lu7v5")]
+position = Vector2(93, 263)
+rotation = -1.5708
 
 [connection signal="pressed" from="Container/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Container/About" to="." method="_on_about_pressed"]
