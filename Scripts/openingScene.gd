@@ -1,7 +1,12 @@
 extends Node
 
+@onready var station = $station
+
 func _ready():
 	pass
+	
+func _process(delta):
+	station.rotation += 0.001
 
 func _on_play_pressed():
 	
