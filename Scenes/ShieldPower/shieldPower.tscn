@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://baphgjmcmiurk"]
+
+[ext_resource type="Script" path="res://Scripts/shieldPower.gd" id="1_87gv1"]
+[ext_resource type="Texture2D" uid="uid://blljgwjj8a4j1" path="res://Assets/Partcles/circle_05.png" id="1_omlod"]
+[ext_resource type="Texture2D" uid="uid://ddwfcvv5kl5bk" path="res://Assets/Partcles/circle_01.png" id="2_x7fqo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eukg8"]
+radius = 33.0606
+
+[node name="ShieldPower" type="Area2D"]
+position = Vector2(210, 248)
+script = ExtResource("1_87gv1")
+metadata/_edit_group_ = true
+
+[node name="Circle05" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.411765)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_omlod")
+
+[node name="Circle01" type="Sprite2D" parent="Circle05"]
+position = Vector2(-1.66666, -1.66669)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_x7fqo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-1, -1)
+shape = SubResource("CircleShape2D_eukg8")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+position = Vector2(233.5, 203.5)
+scale = Vector2(3.75, 3.15)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
