@@ -39,12 +39,14 @@ func _physics_process(delta):
 	var dir_vector = Vector2(0,0)
 
 	if Input.is_action_just_pressed("accelerate"):
+		
 		if fuel1.amount <= 6:
 			fuel1.amount += 1 
 		fuel1.lifetime = 0.25
 		if fuel2.amount <= 6:
 			fuel2.amount += 1 
 		fuel2.lifetime = 0.25
+		
 
 	if Input.is_action_just_released("accelerate"):
 		if fuel1.amount >= 3:
@@ -53,6 +55,8 @@ func _physics_process(delta):
 		if fuel2.amount >= 3:
 			fuel2.amount -= 1 
 		fuel2.lifetime = 0.2
+		
+		dir_vector.y = -1
 
 	if  Input.is_action_pressed("turn_right"):
 		dir_vector.x = 1
@@ -79,11 +83,7 @@ func _physics_process(delta):
 	
 
 func _on_cool_down_timeout():
-	
 	timeout = true
-	
-func applyShield():
-	pass
 
 func damage(amount):
 	var activated = false
@@ -92,7 +92,7 @@ func damage(amount):
 		activated = true
 		return
 	
-	invinsibilityTimer.start()
+	invinsibilityTimer.start(3)
 
 	shield_activated.show()
 	Signals.emit_signal('shieldActivation',activated)
@@ -106,6 +106,20 @@ func damage(amount):
 	view.shake(3)
 	if shipLife <= 0:
 		queue_free()
+
+func applyShield(time):
+	var activated = false
+	
+	if not invinsibilityTimer.is_stopped():
+		activated = true
+		return
+	
+	invinsibilityTimer.start(time)
+
+	shield_activated.show()
+	Signals.emit_signal('shieldActivation',activated)
+	
+	print(time)
 	
 func _on_shield_activater_timeout():
 	shield_activated.hide()
