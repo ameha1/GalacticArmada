@@ -81,18 +81,21 @@ func _physics_process(delta):
 func _on_cool_down_timeout():
 	
 	timeout = true
+	
+func applyShield():
+	pass
 
 func damage(amount):
-
 	var activated = false
 	
 	if not invinsibilityTimer.is_stopped():
-		shield_activated.show()
-		Signals.emit_signal('shieldActivation',activated)
 		activated = true
 		return
-
+	
 	invinsibilityTimer.start()
+
+	shield_activated.show()
+	Signals.emit_signal('shieldActivation',activated)
 	
 	shipLife -= amount
 
@@ -103,9 +106,8 @@ func damage(amount):
 	view.shake(3)
 	if shipLife <= 0:
 		queue_free()
-
-func _on_shield_activater_timeout():
 	
+func _on_shield_activater_timeout():
 	shield_activated.hide()
 	
 func player_state(state):
