@@ -8,6 +8,12 @@ var preloadedEnemies = [
 	preload("res://Scenes/EnemyScene/enemy.tscn"),
 	preload("res://Scenes/EnemyScene/bouncer_enemy.tscn")
 ]
+
+var preloadedElements = [
+	preload("res://Scenes/ShieldPower/shieldPower.tscn"),
+
+]
+
 var pMeteor = preload("res://Scenes/MereorScene/meteor.tscn")
 
 var nextSpawnTime = 10
@@ -24,11 +30,19 @@ func _on_spawn_timer_timeout():
 		var meteor = pMeteor.instantiate()
 		meteor.position = Vector2(xPos,position.y)
 		get_tree().current_scene.add_child(meteor)
+		
+		var elementsPreload = preloadedElements[randi() % preloadedElements.size()]
+		var element = elementsPreload.instantiate()
+		element.position = Vector2(xPos,position.y)
+		get_tree().current_scene.add_child(element)
+		
 	else:
 		var enemyPreload = preloadedEnemies[randi() % preloadedEnemies.size()]
 		var enemy = enemyPreload.instantiate()
 		enemy.position = Vector2(xPos,position.y)
 		get_tree().current_scene.add_child(enemy)
+		
+		
 	
 	nextSpawnTime -= 0.1
 	
