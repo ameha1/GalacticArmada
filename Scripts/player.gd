@@ -12,8 +12,14 @@ var velocity = Vector2(0,0)
 @onready var shield_activated = $shield
 @onready var invinsibilityTimer = $InvisibilityTimer
 @onready var shieldField = $shield/shieldField
+@onready var coolDownTimer = $CoolDown
+@onready var rapidFireTimer = $RapidFireTimer
 @onready var fuel1 = $Fuel
 @onready var fuel2 = $Fuel2
+
+@export var normalFireDelay = 0.2
+@export var rapidFireDelay = 0.08
+var fireDelay = normalFireDelay
 
 var timeout = false
 @export var shipLife = 3
@@ -47,7 +53,6 @@ func _physics_process(delta):
 			fuel2.amount += 1 
 		fuel2.lifetime = 0.25
 		
-
 	if Input.is_action_just_released("accelerate"):
 		if fuel1.amount >= 3:
 			fuel1.amount -= 1 
@@ -55,8 +60,6 @@ func _physics_process(delta):
 		if fuel2.amount >= 3:
 			fuel2.amount -= 1 
 		fuel2.lifetime = 0.2
-		
-		dir_vector.y = -1
 
 	if  Input.is_action_pressed("turn_right"):
 		dir_vector.x = 1
@@ -64,7 +67,8 @@ func _physics_process(delta):
 	if Input.is_action_pressed("turn_left"):
 		dir_vector.x = -1
 
-	if Input.is_action_pressed("shoot") and timeout:
+	if Input.is_action_pressed("shoot") and coolDownTimer.is_stopped():
+		coolDownTimer.start(fireDelay)
 		for child in weaponPositions.get_children():
 			var bullet = pl_bullet.instantiate()
 			bullet.global_position = child.global_position
@@ -81,7 +85,6 @@ func _physics_process(delta):
 	position.x = clamp(position.x, 20, viewRect.size.x)
 	position.y = clamp(position.y, 20, viewRect.size.y)
 	
-
 func _on_cool_down_timeout():
 	timeout = true
 
@@ -119,7 +122,9 @@ func applyShield(time):
 	shield_activated.show()
 	Signals.emit_signal('shieldActivation',activated)
 	
-	print(time)
+func applyRapidFire(time):
+	fireDelay = rapidFireDelay
+	rapidFireTimer.start(time + rapidFireTimer.time_left)
 	
 func _on_shield_activater_timeout():
 	shield_activated.hide()
@@ -134,3 +139,5 @@ func player_state(state):
 			fuel2.amount -= 1 
 		fuel2.lifetime = 0.2
 	
+func _on_rapid_fire_timer_timeout():
+	fireDelay = normalFireDelay
