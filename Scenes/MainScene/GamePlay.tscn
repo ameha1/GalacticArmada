@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://drev0g4nbcp2u"]
+[gd_scene load_steps=12 format=3 uid="uid://drev0g4nbcp2u"]
 
 [ext_resource type="Script" path="res://Scripts/GamePlay.gd" id="1_1e743"]
 [ext_resource type="PackedScene" uid="uid://b2tj4hphbtqry" path="res://Scenes/PlayerScene/Player.tscn" id="1_b1rdn"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://b0fcmcb4wdou5" path="res://Scenes/HUD/hud.tscn" id="5_wovpq"]
 [ext_resource type="Texture2D" uid="uid://yjcynmghdrkk" path="res://Assets/Partcles/star_04.png" id="6_ihxsk"]
 [ext_resource type="Script" path="res://Scripts/View.gd" id="9_8rtis"]
-[ext_resource type="PackedScene" uid="uid://baphgjmcmiurk" path="res://Scenes/ShieldPower/shieldPower.tscn" id="10_787gm"]
 
 [sub_resource type="Animation" id="Animation_gprhp"]
 resource_name = "opening_scene"
@@ -106,9 +105,6 @@ libraries = {
 [node name="View" type="Camera2D" parent="."]
 anchor_mode = 0
 script = ExtResource("9_8rtis")
-
-[node name="ShieldPower" parent="." instance=ExtResource("10_787gm")]
-position = Vector2(223, 274)
 
 [connection signal="timeout" from="Spawner/spawnTimer" to="Spawner" method="_on_spawn_timer_timeout"]
 [connection signal="animation_finished" from="openingScene" to="." method="_on_opening_scene_animation_finished"]
