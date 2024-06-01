@@ -7,9 +7,9 @@
 script = ExtResource("1_5c5gv")
 
 [node name="LifeContainer" type="HBoxContainer" parent="."]
-offset_left = 19.0
+offset_left = 24.0
 offset_top = 30.0
-offset_right = 186.0
+offset_right = 191.0
 offset_bottom = 70.0
 scale = Vector2(0.4, 0.4)
 
