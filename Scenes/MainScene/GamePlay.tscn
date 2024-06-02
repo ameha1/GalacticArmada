@@ -91,7 +91,7 @@ z_index = 100
 position = Vector2(215, 800)
 
 [node name="Spawner" type="Node2D" parent="."]
-position = Vector2(237, -288)
+position = Vector2(227, -93)
 script = ExtResource("5_gdaym")
 
 [node name="spawnTimer" type="Timer" parent="Spawner"]
