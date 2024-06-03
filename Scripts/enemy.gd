@@ -27,7 +27,6 @@ func damage(amount):
 	
 	enemy_lives -= amount
 	
-	
 	if enemy_lives <= 0:
 		Signals.emit_signal("on_score_increment",1)
 		queue_free()
@@ -53,7 +52,7 @@ func _on_detection_zone_area_entered(area):
 func _on_detection_zone_area_exited(area):
 	if area is Player:
 		Detection_Activation = false
-		
-		
-		
-		
+
+func _on_area_entered(area):
+	if area.is_in_group('damagable'):
+		area.damage(1)
