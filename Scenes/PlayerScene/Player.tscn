@@ -1,17 +1,17 @@
 [gd_scene load_steps=7 format=3 uid="uid://b2tj4hphbtqry"]
 
-[ext_resource type="Texture2D" uid="uid://ujp161flf5dr" path="res://Assets/PNG/Sprites/Ships/spaceShips_001.png" id="1_d6yoj"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_nm6uw"]
-[ext_resource type="Texture2D" uid="uid://ddwfcvv5kl5bk" path="res://Assets/Partcles/circle_01.png" id="3_slt6q"]
+[ext_resource type="Texture2D" uid="uid://ctp8gke8yb78b" path="res://Assets/PNG/Sprites/Ships/spaceShips_007.png" id="2_gmou2"]
+[ext_resource type="Texture2D" uid="uid://sbqvo5a1760u" path="res://Assets/Partcles/circle_04.png" id="3_cgl6o"]
 [ext_resource type="Texture2D" uid="uid://dpvx1fr5tag0" path="res://Assets/PNG/Sprites/Effects/spaceEffects_017.png" id="4_q16oy"]
 [ext_resource type="PackedScene" uid="uid://swnbao0y2sa0" path="res://Scenes/FuelScene/fuel.tscn" id="4_yfixc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w30dd"]
-radius = 200.062
+radius = 200.25
 
 [node name="Player" type="Area2D" groups=["damagable"]]
-position = Vector2(207, 113)
-collision_mask = 3
+position = Vector2(231, 417)
+collision_mask = 11
 script = ExtResource("1_nm6uw")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
@@ -22,7 +22,7 @@ polygon = PackedVector2Array(-21, 19, -29, -9, -13, -23, -7, -18, -6, -9, -2, -1
 modulate = Color(1, 1, 1, 0.976471)
 position = Vector2(2, 1)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_d6yoj")
+texture = ExtResource("2_gmou2")
 flip_v = true
 
 [node name="WeaponPositions" type="Node2D" parent="."]
@@ -35,13 +35,13 @@ position = Vector2(15, -23)
 
 [node name="CoolDown" type="Timer" parent="."]
 wait_time = 0.6
-autostart = true
+one_shot = true
 
 [node name="shield" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(2, 2)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("3_slt6q")
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_cgl6o")
 
 [node name="shieldField" type="Area2D" parent="shield"]
 collision_layer = 64
@@ -50,6 +50,7 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shield/shieldField"]
+visible = false
 shape = SubResource("CircleShape2D_w30dd")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
@@ -58,15 +59,20 @@ wait_time = 3.0
 one_shot = true
 
 [node name="Fuel" parent="." instance=ExtResource("4_yfixc")]
+position = Vector2(-17, 41)
 color = Color(1, 1, 1, 0.968627)
 
 [node name="Fuel2" type="CPUParticles2D" parent="."]
-position = Vector2(10, 31)
+position = Vector2(21, 40)
 scale = Vector2(0.8, 0.8)
 amount = 3
 lifetime = 0.2
 local_coords = true
 texture = ExtResource("4_q16oy")
 
+[node name="RapidFireTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="CoolDown" to="." method="_on_cool_down_timeout"]
 [connection signal="timeout" from="InvisibilityTimer" to="." method="_on_shield_activater_timeout"]
+[connection signal="timeout" from="RapidFireTimer" to="." method="_on_rapid_fire_timer_timeout"]
