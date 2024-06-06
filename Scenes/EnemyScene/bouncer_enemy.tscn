@@ -16,6 +16,9 @@ flip_v = true
 [node name="CollisionPolygon2D" parent="." index="1"]
 polygon = PackedVector2Array(-26, -22, -10, -42, -5, -33, -5, -24, 0, -29, 5, -25, 5, -33, 9, -42, 27, -20, 22, 8, 10, 15, 10, 38, -10, 38, -10, 15, -21, 9)
 
+[node name="WeaponPosition" parent="." index="3"]
+position = Vector2(0, 39)
+
 [node name="Fuel" parent="." index="6"]
 position = Vector2(3.55271e-14, -27)
 amount = 6

@@ -25,7 +25,7 @@ position = Vector2(-0.500001, 0.500002)
 scale = Vector2(2.85, 2.65)
 
 [node name="WeaponPosition" type="Node2D" parent="."]
-position = Vector2(0, 14)
+position = Vector2(0, 25)
 
 [node name="center" type="Node2D" parent="WeaponPosition"]
 position = Vector2(0, 32)
