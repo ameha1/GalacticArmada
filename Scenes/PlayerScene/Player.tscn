@@ -21,17 +21,17 @@ polygon = PackedVector2Array(-21, 19, -29, -9, -13, -23, -7, -18, -6, -9, -2, -1
 [node name="SpaceShips001" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.976471)
 position = Vector2(2, 1)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_gmou2")
 flip_v = true
 
 [node name="WeaponPositions" type="Node2D" parent="."]
 
 [node name="position1" type="Node2D" parent="WeaponPositions"]
-position = Vector2(-11, -23)
+position = Vector2(-9, -23)
 
 [node name="position2" type="Node2D" parent="WeaponPositions"]
-position = Vector2(15, -23)
+position = Vector2(13, -23)
 
 [node name="CoolDown" type="Timer" parent="."]
 wait_time = 0.6
@@ -39,8 +39,8 @@ one_shot = true
 
 [node name="shield" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(2, 2)
-scale = Vector2(0.4, 0.4)
+position = Vector2(2, 7)
+scale = Vector2(0.35, 0.35)
 texture = ExtResource("3_cgl6o")
 
 [node name="shieldField" type="Area2D" parent="shield"]
@@ -59,11 +59,11 @@ wait_time = 3.0
 one_shot = true
 
 [node name="Fuel" parent="." instance=ExtResource("4_yfixc")]
-position = Vector2(-17, 41)
+position = Vector2(-14, 36)
 color = Color(1, 1, 1, 0.968627)
 
 [node name="Fuel2" type="CPUParticles2D" parent="."]
-position = Vector2(21, 40)
+position = Vector2(18, 36)
 scale = Vector2(0.8, 0.8)
 amount = 3
 lifetime = 0.2
