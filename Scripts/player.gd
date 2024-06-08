@@ -3,6 +3,7 @@ extends Area2D
 class_name Player
 
 var pl_bullet = preload("res://Scenes/BulletScene/bullet.tscn")
+var playerExplosion = preload("res://Scenes/PlayerScene/player_explosion.tscn")
 
 @onready var speed = 200
 
@@ -41,11 +42,9 @@ func _process(delta):
 	pass
 
 func _physics_process(delta):
-
 	var dir_vector = Vector2(0,0)
 
 	if Input.is_action_just_pressed("accelerate"):
-		
 		if fuel1.amount <= 6:
 			fuel1.amount += 1 
 		fuel1.lifetime = 0.25
@@ -107,7 +106,12 @@ func damage(amount):
 
 	var view = get_tree().current_scene.find_child("View",true,false)
 	view.shake(3)
+	
 	if shipLife <= 0:
+		var effect = playerExplosion.instantiate()
+		effect.position = position
+		get_tree().current_scene.add_child(effect)
+
 		queue_free()
 
 func applyShield(time):
