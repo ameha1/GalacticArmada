@@ -8,4 +8,5 @@
 texture = ExtResource("2_d8cyx")
 
 [node name="Explosion" parent="." index="0" instance=ExtResource("1_rfrei")]
+scale = Vector2(1, 1)
 texture = ExtResource("3_erj1u")
