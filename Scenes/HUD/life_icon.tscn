@@ -1,10 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://bgiobhvyui8c6"]
 
-[ext_resource type="Texture2D" uid="uid://ujp161flf5dr" path="res://Assets/PNG/Sprites/Ships/spaceShips_001.png" id="1_4wy7d"]
+[ext_resource type="Texture2D" uid="uid://ctp8gke8yb78b" path="res://Assets/PNG/Sprites/Ships/spaceShips_007.png" id="1_8w0tl"]
 
 [node name="LifeIcon" type="TextureRect"]
 modulate = Color(1, 1, 1, 0.756863)
 offset_right = 106.0
 offset_bottom = 80.0
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_4wy7d")
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_8w0tl")
