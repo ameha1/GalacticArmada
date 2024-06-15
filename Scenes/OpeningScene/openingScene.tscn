@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://caqsi7joprpbj"]
+[gd_scene load_steps=12 format=3 uid="uid://caqsi7joprpbj"]
 
 [ext_resource type="Script" path="res://Scripts/openingScene.gd" id="1_1pi0d"]
 [ext_resource type="Texture2D" uid="uid://danien45jmttp" path="res://Assets/PNG/Sprites/darkBackGround.jpg" id="1_tgwkr"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dlmrr74mr7hst" path="res://Assets/PNG/Sprites/Station/spaceStation_028.png" id="6_l2er2"]
 [ext_resource type="Texture2D" uid="uid://c6l1eyp05myke" path="res://Assets/PNG/Sprites/Station/spaceStation_015.png" id="7_gsiid"]
 [ext_resource type="PackedScene" uid="uid://swnbao0y2sa0" path="res://Scenes/FuelScene/fuel.tscn" id="8_lu7v5"]
+[ext_resource type="PackedScene" uid="uid://cjrsbjyyxa68h" path="res://Scenes/SceneTransition/screen_transition.tscn" id="9_oqdpd"]
 
 [sub_resource type="Animation" id="Animation_btv8r"]
 resource_name = "cruise"
@@ -107,7 +108,7 @@ libraries = {
 }
 
 [node name="station" type="Sprite2D" parent="."]
-position = Vector2(334, 297)
+position = Vector2(318, 276)
 
 [node name="SpaceStation024" type="Sprite2D" parent="station"]
 modulate = Color(1, 1, 1, 0.529412)
@@ -139,6 +140,8 @@ rotation = -1.5708
 [node name="Fuel3" parent="station" instance=ExtResource("8_lu7v5")]
 position = Vector2(93, 263)
 rotation = -1.5708
+
+[node name="ScreenTransition" parent="." instance=ExtResource("9_oqdpd")]
 
 [connection signal="pressed" from="Container/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Container/About" to="." method="_on_about_pressed"]
