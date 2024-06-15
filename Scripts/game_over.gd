@@ -1,6 +1,7 @@
 extends Control
 
 @onready var gameOver = $gameOverPlayer
+@onready var screenTransition = $ScreenTransition
 
 var playerLife = 8
 var gameOverPullUp = false
@@ -14,17 +15,20 @@ func _process(delta):
 		return
 	
 func _on_retry_pressed():
-	get_tree().change_scene_to_file("res://Scenes/MainScene/GamePlay.tscn")	
-#func _on_play_again_pressed():
-	#get_tree().change_scene_to_file("res://Scenes/MainScene/GamePlay.tscn")
+	screenTransition.play("fade")
+	await get_tree().create_timer(1).timeout
+	get_tree().change_scene_to_file("res://Scenes/MainScene/GamePlay.tscn")
 
 func _on_exit_pressed():
+	screenTransition.play("fade")
+	await get_tree().create_timer(1).timeout
 	get_tree().quit()
 
 func on_playerLife(life):
 	playerLife = life
 
 func _on_about_pressed():
+	screenTransition.play("fade")
+	await get_tree().create_timer(1).timeout
 	get_tree().change_scene_to_file("res://Scenes/CreditsScene/credits.tscn")
-
 
