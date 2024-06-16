@@ -1,7 +1,7 @@
 extends Node
 
 @onready var station = $station
-@onready var screenTransition = $ScreenTransition
+@onready var screenTransition = $SceneTransition
 @onready var screenTime = $Timer
 
 var screenTimeOut = false
