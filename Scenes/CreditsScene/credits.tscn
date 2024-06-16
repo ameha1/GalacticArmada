@@ -91,6 +91,6 @@ libraries = {
 "": SubResource("AnimationLibrary_yrcg7")
 }
 
-[node name="ScreenTransition" parent="." instance=ExtResource("4_5uxf0")]
+[node name="SceneTransition" parent="." instance=ExtResource("4_5uxf0")]
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
