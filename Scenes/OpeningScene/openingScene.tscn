@@ -141,7 +141,7 @@ rotation = -1.5708
 position = Vector2(93, 263)
 rotation = -1.5708
 
-[node name="ScreenTransition" parent="." instance=ExtResource("9_oqdpd")]
+[node name="SceneTransition" parent="." instance=ExtResource("9_oqdpd")]
 
 [connection signal="pressed" from="Container/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Container/About" to="." method="_on_about_pressed"]
