@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b2tj4hphbtqry"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_nm6uw"]
-[ext_resource type="Texture2D" uid="uid://ctp8gke8yb78b" path="res://Assets/PNG/Sprites/Ships/spaceShips_007.png" id="2_gmou2"]
+[ext_resource type="Texture2D" uid="uid://l6srsobptewi" path="res://Assets/PNG/Sprites/Ships/spaceShips_008.png" id="2_laj4l"]
 [ext_resource type="Texture2D" uid="uid://sbqvo5a1760u" path="res://Assets/Partcles/circle_04.png" id="3_cgl6o"]
 [ext_resource type="Texture2D" uid="uid://dpvx1fr5tag0" path="res://Assets/PNG/Sprites/Effects/spaceEffects_017.png" id="4_q16oy"]
 [ext_resource type="PackedScene" uid="uid://swnbao0y2sa0" path="res://Scenes/FuelScene/fuel.tscn" id="4_yfixc"]
@@ -16,22 +16,22 @@ script = ExtResource("1_nm6uw")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
-polygon = PackedVector2Array(-21, 19, -29, -9, -13, -23, -7, -18, -6, -9, -2, -14, 7, -14, 11, -8, 11, -19, 18, -22, 33, -8, 25, 18, 12, 23, -10, 23)
+polygon = PackedVector2Array(-24, 17, -30, -20, -18, -28, -7, -11, -4, -20, 9, -20, 11, -10, 22, -27, 34, -21, 29, 15, 13, 24, -8, 24)
 
 [node name="SpaceShips001" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.976471)
 position = Vector2(2, 1)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_gmou2")
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_laj4l")
 flip_v = true
 
 [node name="WeaponPositions" type="Node2D" parent="."]
 
 [node name="position1" type="Node2D" parent="WeaponPositions"]
-position = Vector2(-9, -23)
+position = Vector2(-15, -22)
 
 [node name="position2" type="Node2D" parent="WeaponPositions"]
-position = Vector2(13, -23)
+position = Vector2(19, -22)
 
 [node name="CoolDown" type="Timer" parent="."]
 wait_time = 0.6
@@ -59,12 +59,13 @@ wait_time = 3.0
 one_shot = true
 
 [node name="Fuel" parent="." instance=ExtResource("4_yfixc")]
-position = Vector2(-14, 36)
+position = Vector2(-7, 33)
+scale = Vector2(0.6, 0.6)
 color = Color(1, 1, 1, 0.968627)
 
 [node name="Fuel2" type="CPUParticles2D" parent="."]
-position = Vector2(18, 36)
-scale = Vector2(0.8, 0.8)
+position = Vector2(11, 33)
+scale = Vector2(0.6, 0.6)
 amount = 3
 lifetime = 0.2
 local_coords = true
