@@ -169,6 +169,25 @@ angular_velocity_max = 25.0
 scale_amount_min = 0.25
 scale_amount_max = 0.3
 
+[node name="stars3" type="CPUParticles2D" parent="DarkBackGround"]
+position = Vector2(1163.51, 1618.46)
+amount = 20
+lifetime = 2.0
+speed_scale = 0.5
+randomness = 1.0
+local_coords = true
+texture = ExtResource("6_ihxsk")
+emission_shape = 3
+emission_rect_extents = Vector2(1400, 1400)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 100.0
+angular_velocity_min = 10.0
+angular_velocity_max = 25.0
+scale_amount_min = 0.25
+scale_amount_max = 0.3
+
 [node name="Spawner" type="Node2D" parent="."]
 position = Vector2(227, -93)
 script = ExtResource("5_gdaym")
