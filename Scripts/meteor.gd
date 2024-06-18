@@ -1,7 +1,7 @@
 extends Area2D
 
 @onready var meteorEffect = preload("res://Scenes/MereorScene/meteor_effect.tscn")
-
+@onready var scorePoint = preload("res://Scenes/ScorePointScene/score_point.tscn")
 
 @export var min_speed = 50
 @export var max_speed = 100
@@ -49,6 +49,11 @@ func damage(amount):
 		queue_free()
 
 func _on_area_entered(area):
+	var point = scorePoint.instantiate()
+	point.global_position = global_position
+	get_tree().current_scene.add_child(point)
+	
+	Signals.emit_signal("on_score_increment",1)
 	if area is Player:
 		playerInArea = area
 
