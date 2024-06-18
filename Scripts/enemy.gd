@@ -8,11 +8,16 @@ class_name Enemy
 @onready var WeaponPosition = $WeaponPosition
 
 var pl_bullet = preload("res://Scenes/BulletScene/enemy_bullet.tscn")
+var enemyExplosion = preload("res://Scenes/EnemyScene/enemy_explosion.tscn")
+var scorePoint = preload("res://Scenes/ScorePointScene/score_point.tscn")
 
 @onready var timeOut = false
 @onready var Detection_Activation = false
 
 #var playerInArea: Player = null
+
+func _ready():
+	pass
 
 func _process(delta):
 	
@@ -30,6 +35,11 @@ func damage(amount):
 	if enemy_lives <= 0:
 		Signals.emit_signal("on_score_increment",1)
 		queue_free()
+		var effect = enemyExplosion.instantiate()
+		effect.position = position
+		get_tree().current_scene.add_child(effect)
+		
+		queue_free
 
 func fire():
 	
@@ -54,5 +64,12 @@ func _on_detection_zone_area_exited(area):
 		Detection_Activation = false
 
 func _on_area_entered(area):
+	var point = scorePoint.instantiate()
+	point.global_position = global_position
+	get_tree().current_scene.add_child(point)
+	
+	Signals.emit_signal("on_score_increment",1)
+	
 	if area.is_in_group('damagable'):
 		area.damage(1)
+
