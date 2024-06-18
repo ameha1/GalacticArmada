@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=3 uid="uid://vyou2k88n4xj"]
+
+[ext_resource type="FontFile" uid="uid://dey34fpcbngt1" path="res://Assets/Fonts/Kenney Blocks.ttf" id="1_07dm8"]
+[ext_resource type="Script" path="res://Scripts/score_point.gd" id="2_x0cxf"]
+
+[sub_resource type="Animation" id="Animation_lqd0h"]
+resource_name = "score_point"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u5taw"]
+_data = {
+"score_point": SubResource("Animation_lqd0h")
+}
+
+[node name="ScorePoint" type="Label"]
+offset_right = 40.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("1_07dm8")
+theme_override_font_sizes/font_size = 20
+text = "+1"
+script = ExtResource("2_x0cxf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_u5taw")
+}
