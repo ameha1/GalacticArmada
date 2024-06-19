@@ -18,6 +18,10 @@ var velocity = Vector2(0,0)
 @onready var fuel1 = $Fuel
 @onready var fuel2 = $Fuel2
 
+@onready var fireAudio = $FireAudio
+@onready var shieldAudio = $ShieldAudio
+@onready var fuelAudio = $FuelAudio
+
 @export var normalFireDelay = 0.2
 @export var rapidFireDelay = 0.08
 var fireDelay = normalFireDelay
@@ -26,6 +30,8 @@ var timeout = false
 @export var shipLife = 3
 
 func _ready():
+	
+	fuelAudio.play()
 	
 	shield_activated.hide()
 	Signals.openingScene_notifier.connect(player_state)
@@ -45,6 +51,9 @@ func _physics_process(delta):
 	var dir_vector = Vector2(0,0)
 
 	if Input.is_action_just_pressed("accelerate"):
+		if fuelAudio.pitch_scale <= 2:
+			fuelAudio.pitch_scale += 0.1
+			
 		if fuel1.amount <= 6:
 			fuel1.amount += 1 
 		fuel1.lifetime = 0.25
@@ -53,6 +62,7 @@ func _physics_process(delta):
 		fuel2.lifetime = 0.25
 		
 	if Input.is_action_just_released("accelerate"):
+		fuelAudio.pitch_scale = 1
 		if fuel1.amount >= 3:
 			fuel1.amount -= 1 
 		fuel1.lifetime = 0.2
@@ -67,6 +77,7 @@ func _physics_process(delta):
 		dir_vector.x = -1
 
 	if Input.is_action_pressed("shoot") and coolDownTimer.is_stopped():
+		fireAudio.play()
 		coolDownTimer.start(fireDelay)
 		for child in weaponPositions.get_children():
 			var bullet = pl_bullet.instantiate()
@@ -103,7 +114,8 @@ func damage(amount):
 
 	Signals.emit_signal('on_playerLife_changed',shipLife)
 	Signals.emit_signal('shieldActivation',activated)
-
+	shieldAudio.play()
+	
 	var view = get_tree().current_scene.find_child("View",true,false)
 	view.shake(3)
 	
@@ -115,11 +127,14 @@ func damage(amount):
 		queue_free()
 
 func applyShield(time):
+	
 	var activated = false
 	
 	if not invinsibilityTimer.is_stopped():
 		activated = true
 		return
+	
+	shieldAudio.play()
 	
 	invinsibilityTimer.start(time)
 
