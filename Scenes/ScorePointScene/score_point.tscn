@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://vyou2k88n4xj"]
 
-[ext_resource type="FontFile" uid="uid://dey34fpcbngt1" path="res://Assets/Fonts/Kenney Blocks.ttf" id="1_07dm8"]
+[ext_resource type="FontFile" uid="uid://ba4oi1sigskrp" path="res://Assets/Fonts/Kenney Future Narrow.ttf" id="1_8pp1i"]
 [ext_resource type="Script" path="res://Scripts/score_point.gd" id="2_x0cxf"]
 
 [sub_resource type="Animation" id="Animation_lqd0h"]
@@ -53,7 +53,7 @@ _data = {
 [node name="ScorePoint" type="Label"]
 offset_right = 40.0
 offset_bottom = 30.0
-theme_override_fonts/font = ExtResource("1_07dm8")
+theme_override_fonts/font = ExtResource("1_8pp1i")
 theme_override_font_sizes/font_size = 20
 text = "+1"
 script = ExtResource("2_x0cxf")
