@@ -2,8 +2,8 @@ extends Area2D
 
 class_name Enemy
 
-@export var speed = 80
-@export var enemy_lives = 8
+@export var speed = 60
+@export var enemy_lives = 6
 
 @onready var WeaponPosition = $WeaponPosition
 
@@ -17,18 +17,17 @@ var scorePoint = preload("res://Scenes/ScorePointScene/score_point.tscn")
 @onready var enemyHitAudio = $EnemyHitAudio
 @onready var enemyExplosionAudio = $EnemyExplosionAudio
 @onready var enemyFireAudio = $EnemyFireAudio
-#var playerInArea: Player = null
+
+@onready var timer = $Timer
 
 func _ready():
 	pass
 
 func _process(delta):
-	
 	if Detection_Activation and timeOut:
 		fire()
-
-func _physics_process(delta):
 	
+func _physics_process(delta):
 	position.y += speed*delta
 
 func damage(amount):
@@ -36,14 +35,10 @@ func damage(amount):
 	enemy_lives -= amount
 	
 	if enemy_lives <= 0:
+		timer.start(0.5)
+		
 		Signals.emit_signal("on_score_increment",1)
 		
-		var effect = enemyExplosion.instantiate()
-		effect.position = position
-		get_tree().current_scene.add_child(effect)
-		
-		queue_free()
-	
 func fire():
 	enemyFireAudio.play()
 	for child in WeaponPosition.get_children():
@@ -67,10 +62,6 @@ func _on_detection_zone_area_exited(area):
 		Detection_Activation = false
 
 func _on_area_entered(area):
-	
-	if enemy_lives <= 0:
-		enemyExplosionAudio.play()
-		
 	var point = scorePoint.instantiate()
 	point.global_position = global_position
 	get_tree().current_scene.add_child(point)
@@ -80,3 +71,11 @@ func _on_area_entered(area):
 	if area.is_in_group('damagable'):
 		area.damage(1)
 
+func _on_timer_timeout():
+	#enemyExplosionAudio.play()
+	
+	var effect = enemyExplosion.instantiate()
+	effect.position = position
+	get_tree().current_scene.add_child(effect)
+
+	queue_free()

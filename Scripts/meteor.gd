@@ -11,6 +11,8 @@ var meteor_damagePoint = 10
 @export var min_rotation = -25
 @export var max_rotation = 25
 
+@onready var hitAudio = $MeteorHitAudio
+
 var speed = randf_range(min_speed, max_speed)
 var m_rotation = randf_range(min_rotation, max_rotation)
 
@@ -24,20 +26,18 @@ func _process(delta):
 	if meteor_damagePoint <= 0:
 		queue_free()
 	
-
 func _physics_process(delta):
 
 	rotation_degrees += m_rotation * delta
 	position.y += speed * delta
 	
-
-
 func _on_visible_on_screen_notifier_2d_screen_exited():
 
 	queue_free()
 
 func damage(amount):
-
+	
+	hitAudio.play()
 	meteor_damagePoint -= amount
 	
 	if  meteor_damagePoint <= 0:
@@ -46,6 +46,7 @@ func damage(amount):
 		get_tree().current_scene.add_child(effect)
 		Signals.emit_signal("on_score_increment",1)
 		
+		await get_tree().create_timer(0.5).timeout
 		queue_free()
 
 func _on_area_entered(area):
