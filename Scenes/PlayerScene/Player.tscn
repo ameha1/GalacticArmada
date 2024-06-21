@@ -42,8 +42,8 @@ one_shot = true
 
 [node name="shield" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(2, 7)
-scale = Vector2(0.35, 0.35)
+position = Vector2(3, 3)
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("3_cgl6o")
 
 [node name="shieldField" type="Area2D" parent="shield"]
