@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://cjrsbjyyxa68h"]
 
+[ext_resource type="AudioStream" uid="uid://dr0uk2d8fxt1s" path="res://Assets/Audio/doorOpen_000.ogg" id="1_2fgl6"]
 [ext_resource type="Script" path="res://Scripts/SceneTransition.gd" id="1_dnvtn"]
-[ext_resource type="AudioStream" uid="uid://bntw5avxuj6vu" path="res://Assets/Audio/doorClose_000.ogg" id="1_o0man"]
-[ext_resource type="AudioStream" uid="uid://dr0uk2d8fxt1s" path="res://Assets/Audio/doorOpen_000.ogg" id="2_t8wt0"]
+[ext_resource type="AudioStream" uid="uid://bntw5avxuj6vu" path="res://Assets/Audio/doorClose_000.ogg" id="2_r6up4"]
 
 [sub_resource type="Animation" id="Animation_h5t5g"]
 resource_name = "fade"
@@ -41,13 +41,13 @@ tracks/2/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("1_o0man")
+"stream": ExtResource("1_2fgl6")
 }, {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("2_t8wt0")
+"stream": ExtResource("2_r6up4")
 }],
-"times": PackedFloat32Array(0.3, 1.1)
+"times": PackedFloat32Array(0, 1)
 }
 tracks/2/use_blend = true
 
@@ -62,8 +62,7 @@ libraries = {
 }
 
 [node name="transition" type="ColorRect" parent="."]
-visible = false
-self_modulate = Color(0, 0, 0, 0)
+self_modulate = Color(0, 0, 0, 0.5)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
