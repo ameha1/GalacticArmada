@@ -51,7 +51,7 @@ func _physics_process(delta):
 	var dir_vector = Vector2(0,0)
 
 	if Input.is_action_just_pressed("accelerate"):
-		if fuelAudio.pitch_scale <= 2:
+		if fuelAudio.pitch_scale <= 3:
 			fuelAudio.pitch_scale += 0.1
 			
 		if fuel1.amount <= 6:
@@ -62,7 +62,8 @@ func _physics_process(delta):
 		fuel2.lifetime = 0.25
 		
 	if Input.is_action_just_released("accelerate"):
-		fuelAudio.pitch_scale = 1
+		if fuelAudio.pitch_scale >= 1:
+			fuelAudio.pitch_scale -= 0.1
 		if fuel1.amount >= 3:
 			fuel1.amount -= 1 
 		fuel1.lifetime = 0.2
@@ -101,9 +102,13 @@ func _on_cool_down_timeout():
 func damage(amount):
 	var activated = false
 	
+	
 	if not invinsibilityTimer.is_stopped():
 		activated = true
 		return
+	
+	shieldField.monitoring = true
+	shieldField.monitorable = true
 	
 	invinsibilityTimer.start(3)
 
@@ -146,6 +151,8 @@ func applyRapidFire(time):
 	rapidFireTimer.start(time + rapidFireTimer.time_left)
 	
 func _on_shield_activater_timeout():
+	shieldField.monitoring = false
+	shieldField.monitorable = false
 	shield_activated.hide()
 	
 func player_state(state):
@@ -160,3 +167,6 @@ func player_state(state):
 	
 func _on_rapid_fire_timer_timeout():
 	fireDelay = normalFireDelay
+
+func _on_shield_field_area_entered(area):
+	area.queue_free()
