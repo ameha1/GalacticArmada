@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cb7c5rvtn0yfc"]
+[gd_scene load_steps=7 format=3 uid="uid://cb7c5rvtn0yfc"]
 
 [ext_resource type="Texture2D" uid="uid://c0wiq2it0ff2p" path="res://Assets/PNG/Sprites/Ships/spaceShips_003.png" id="1_c3t8l"]
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_xlvrb"]
 [ext_resource type="PackedScene" uid="uid://swnbao0y2sa0" path="res://Scenes/FuelScene/fuel.tscn" id="3_7f70d"]
 [ext_resource type="AudioStream" uid="uid://cbv4ontn5i6kc" path="res://Assets/Audio/laserLarge_000.ogg" id="4_ixjcd"]
 [ext_resource type="AudioStream" uid="uid://b6um6m2ejde7m" path="res://Assets/Audio/laserSmall_003.ogg" id="5_kfwoc"]
-[ext_resource type="AudioStream" uid="uid://b2nyfo4rwoflk" path="res://Assets/Audio/lowFrequency_explosion_001.ogg" id="5_yd816"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d7pes"]
 size = Vector2(4, 598)
@@ -35,7 +34,7 @@ position = Vector2(0, 25)
 position = Vector2(0, 32)
 
 [node name="CoolDown" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 1.5
 autostart = true
 
 [node name="DetectionZone" type="Area2D" parent="."]
@@ -60,10 +59,15 @@ stream = ExtResource("5_kfwoc")
 volume_db = -10.0
 
 [node name="EnemyExplosionAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_yd816")
+stream = ExtResource("5_kfwoc")
+volume_db = -10.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="timeout" from="CoolDown" to="." method="_on_cool_down_timeout"]
 [connection signal="area_entered" from="DetectionZone" to="." method="_on_detection_zone_area_entered"]
 [connection signal="area_exited" from="DetectionZone" to="." method="_on_detection_zone_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
