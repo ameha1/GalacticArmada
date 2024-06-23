@@ -22,7 +22,7 @@ visible = false
 polygon = PackedVector2Array(-24, 17, -30, -20, -18, -28, -7, -11, -4, -20, 9, -20, 11, -10, 22, -27, 34, -21, 29, 15, 13, 24, -8, 24)
 
 [node name="SpaceShips001" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.976471)
+modulate = Color(0, 1, 1, 1)
 position = Vector2(2, 1)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_laj4l")
@@ -53,7 +53,6 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shield/shieldField"]
-visible = false
 shape = SubResource("CircleShape2D_w30dd")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
@@ -89,5 +88,6 @@ stream = ExtResource("8_obhv4")
 volume_db = -15.0
 
 [connection signal="timeout" from="CoolDown" to="." method="_on_cool_down_timeout"]
+[connection signal="area_entered" from="shield/shieldField" to="." method="_on_shield_field_area_entered"]
 [connection signal="timeout" from="InvisibilityTimer" to="." method="_on_shield_activater_timeout"]
 [connection signal="timeout" from="RapidFireTimer" to="." method="_on_rapid_fire_timer_timeout"]
