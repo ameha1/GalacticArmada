@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsodr8cy2dnkc"]
+
+[ext_resource type="Script" path="res://Scripts/enemy_audio.gd" id="1_b7yk3"]
+[ext_resource type="AudioStream" uid="uid://cm01ohps5xwfr" path="res://Assets/Audio/laserLarge_001.ogg" id="1_twkdq"]
+[ext_resource type="AudioStream" uid="uid://cknpcvhwh07bd" path="res://Assets/Audio/lowFrequency_explosion_000.ogg" id="3_n0bew"]
+[ext_resource type="AudioStream" uid="uid://t8icc17ahd67" path="res://Assets/Audio/laserSmall_000.ogg" id="4_yqwuh"]
+
+[node name="EnemyAudio" type="Node"]
+script = ExtResource("1_b7yk3")
+
+[node name="EnemyHitAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_twkdq")
+volume_db = -15.0
+pitch_scale = 0.65
+
+[node name="EnemyDestructionAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_n0bew")
+
+[node name="EnemyFireAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_yqwuh")
+volume_db = -10.0
