@@ -6,6 +6,9 @@ class_name Enemy
 @export var enemy_lives = 6
 
 @onready var WeaponPosition = $WeaponPosition
+@onready var enemyAudio = $EnemyAudio
+@onready var detectionZone = $DetectionZone
+@onready var collisionZone = $CollisionPolygon2D
 
 var pl_bullet = preload("res://Scenes/BulletScene/enemy_bullet.tscn")
 var enemyExplosion = preload("res://Scenes/EnemyScene/enemy_explosion.tscn")
@@ -13,8 +16,6 @@ var scorePoint = preload("res://Scenes/ScorePointScene/score_point.tscn")
 
 @onready var timeOut = false
 @onready var Detection_Activation = false
-
-@onready var enemyAudio = $EnemyAudio
 
 
 func _ready():
@@ -32,12 +33,17 @@ func damage(amount):
 	enemy_lives -= amount
 	
 	if enemy_lives <= 0:
+		for child in get_children():
+			if child != enemyAudio:
+				remove_child(child)
+				child.queue_free()
+		
 		enemyAudio.enemyDestructionAudioPlay()
 		var effect = enemyExplosion.instantiate()
 		effect.position = position
 		get_tree().current_scene.add_child(effect)
-
-		queue_free()
+		
+		hide()
 		
 		Signals.emit_signal("on_score_increment",1)
 		
@@ -71,4 +77,3 @@ func _on_area_entered(area):
 	
 	if area.is_in_group('damagable'):
 		area.damage(1)
-
