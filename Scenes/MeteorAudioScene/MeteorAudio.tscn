@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbt4nlhm2ou83"]
+
+[ext_resource type="Script" path="res://Scripts/meteorAudio.gd" id="1_xfqwx"]
+[ext_resource type="AudioStream" uid="uid://qs2nvyqh1qdn" path="res://Assets/Audio/laserRetro_001.ogg" id="2_k52rk"]
+[ext_resource type="AudioStream" uid="uid://cknpcvhwh07bd" path="res://Assets/Audio/lowFrequency_explosion_000.ogg" id="3_hc6wb"]
+
+[node name="MeteorAudio" type="Node"]
+script = ExtResource("1_xfqwx")
+
+[node name="MeteorHitAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_k52rk")
+volume_db = -15.0
+pitch_scale = 0.35
+
+[node name="MeteorDestructionAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_hc6wb")
+volume_db = 20.0
+pitch_scale = 0.8
