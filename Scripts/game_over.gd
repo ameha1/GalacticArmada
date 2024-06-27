@@ -2,6 +2,7 @@ extends Control
 
 @onready var gameOver = $gameOverPlayer
 @onready var screenTransition = $SceneTransition
+@onready var gamePause = $"../GamePause"
 
 var playerLife = 8
 var gameOverPullUp = false
@@ -34,3 +35,5 @@ func _on_about_pressed():
 func game_Over():
 	if playerLife <= 0:
 		gameOver.play("gameover")
+		gamePause.hide()
+	
