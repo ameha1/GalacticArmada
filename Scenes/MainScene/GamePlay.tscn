@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://drev0g4nbcp2u"]
+[gd_scene load_steps=20 format=3 uid="uid://drev0g4nbcp2u"]
 
 [ext_resource type="Script" path="res://Scripts/GamePlay.gd" id="1_1e743"]
 [ext_resource type="PackedScene" uid="uid://b2tj4hphbtqry" path="res://Scenes/PlayerScene/Player.tscn" id="1_b1rdn"]
@@ -8,7 +8,11 @@
 [ext_resource type="FontFile" uid="uid://dey34fpcbngt1" path="res://Assets/Fonts/Kenney Blocks.ttf" id="4_krbl4"]
 [ext_resource type="Script" path="res://Scripts/Spawner.gd" id="5_gdaym"]
 [ext_resource type="PackedScene" uid="uid://b0fcmcb4wdou5" path="res://Scenes/HUD/hud.tscn" id="5_wovpq"]
+[ext_resource type="Texture2D" uid="uid://d4md4d44x5i63" path="res://Assets/UI/Sprites/transparent-dark/transparentDark06.png" id="6_don2f"]
+[ext_resource type="Texture2D" uid="uid://5m73u0woskea" path="res://Assets/UI/Sprites/line-light/lineLight12.png" id="6_g3ab5"]
 [ext_resource type="Texture2D" uid="uid://yjcynmghdrkk" path="res://Assets/Partcles/star_04.png" id="6_ihxsk"]
+[ext_resource type="Script" path="res://Scripts/GamePause.gd" id="6_n3ivv"]
+[ext_resource type="Texture2D" uid="uid://c0b554yojxnie" path="res://Assets/UI/Sprites/line-light/lineLight14.png" id="7_ano31"]
 [ext_resource type="Script" path="res://Scripts/View.gd" id="9_8rtis"]
 [ext_resource type="PackedScene" uid="uid://cjrsbjyyxa68h" path="res://Scenes/SceneTransition/screen_transition.tscn" id="11_ruflh"]
 
@@ -125,6 +129,43 @@ libraries = {
 "": SubResource("AnimationLibrary_akrfa")
 }
 
+[node name="GamePause" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_n3ivv")
+
+[node name="PauseBG" type="TextureRect" parent="CanvasLayer/GamePause"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_don2f")
+
+[node name="PauseButton" type="TextureButton" parent="CanvasLayer/GamePause"]
+layout_direction = 1
+offset_left = 386.0
+offset_top = 19.0
+offset_right = 434.0
+offset_bottom = 67.0
+action_mode = 0
+texture_normal = ExtResource("6_g3ab5")
+
+[node name="PlayButton" type="TextureButton" parent="CanvasLayer/GamePause"]
+layout_mode = 0
+offset_left = 386.0
+offset_top = 19.0
+offset_right = 434.0
+offset_bottom = 67.0
+action_mode = 0
+texture_normal = ExtResource("7_ano31")
+
 [node name="DarkBackGround" type="Sprite2D" parent="."]
 z_index = -100
 position = Vector2(46, 40)
@@ -211,5 +252,7 @@ script = ExtResource("9_8rtis")
 [connection signal="pressed" from="CanvasLayer/GameOver/VBoxContainer/Retry" to="CanvasLayer/GameOver" method="_on_retry_pressed"]
 [connection signal="pressed" from="CanvasLayer/GameOver/VBoxContainer/About" to="CanvasLayer/GameOver" method="_on_about_pressed"]
 [connection signal="pressed" from="CanvasLayer/GameOver/VBoxContainer/Exit" to="CanvasLayer/GameOver" method="_on_exit_pressed"]
+[connection signal="pressed" from="CanvasLayer/GamePause/PauseButton" to="CanvasLayer/GamePause" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GamePause/PlayButton" to="CanvasLayer/GamePause" method="_on_play_button_pressed"]
 [connection signal="timeout" from="Spawner/spawnTimer" to="Spawner" method="_on_spawn_timer_timeout"]
 [connection signal="animation_finished" from="openingScene" to="." method="_on_opening_scene_animation_finished"]
