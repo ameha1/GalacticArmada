@@ -11,7 +11,7 @@ var meteor_damagePoint = 10
 @export var min_rotation = -25
 @export var max_rotation = 25
 
-@onready var hitAudio = $MeteorHitAudio
+@onready var meteorAudio = $MeteorAudio
 
 var speed = randf_range(min_speed, max_speed)
 var m_rotation = randf_range(min_rotation, max_rotation)
@@ -36,18 +36,20 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
 
 func damage(amount):
-	
-	hitAudio.play()
+
+	meteorAudio.meteorHitAudioPlay()
 	meteor_damagePoint -= amount
 	
 	if  meteor_damagePoint <= 0:
+		for child in get_children():
+			if child != meteorAudio:
+				remove_child(child)
+				child.queue_free()
+	
 		var effect = meteorEffect.instantiate()
 		effect.position = position
 		get_tree().current_scene.add_child(effect)
 		Signals.emit_signal("on_score_increment",1)
-		
-		await get_tree().create_timer(0.5).timeout
-		queue_free()
 
 func _on_area_entered(area):
 	var point = scorePoint.instantiate()
@@ -61,6 +63,3 @@ func _on_area_entered(area):
 func _on_area_exited(area):
 	if area is Player:
 		playerInArea = null
-		
-
-
