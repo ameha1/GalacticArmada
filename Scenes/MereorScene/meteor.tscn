@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/meteor.gd" id="1_2560c"]
 [ext_resource type="Texture2D" uid="uid://cj8rwiq06nm4y" path="res://Assets/PNG/Sprites/Meteors/spaceMeteors_004.png" id="2_5u33u"]
-[ext_resource type="AudioStream" uid="uid://c8wv0uuuf7mqd" path="res://Assets/Audio/laserLarge_004.ogg" id="3_twak4"]
+[ext_resource type="PackedScene" uid="uid://dbt4nlhm2ou83" path="res://Scenes/MeteorAudioScene/MeteorAudio.tscn" id="3_ftpep"]
 
 [node name="Meteor" type="Area2D" groups=["damagable"]]
 position = Vector2(208, 252)
@@ -24,9 +24,7 @@ visible = false
 position = Vector2(0.499998, 0.5)
 scale = Vector2(5.45, 5.15)
 
-[node name="MeteorHitAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_twak4")
-volume_db = -10.0
+[node name="MeteorAudio" parent="." instance=ExtResource("3_ftpep")]
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
