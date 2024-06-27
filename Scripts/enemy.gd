@@ -33,12 +33,13 @@ func damage(amount):
 	enemy_lives -= amount
 	
 	if enemy_lives <= 0:
+		enemyAudio.enemyDestructionAudioPlay()
+		
 		for child in get_children():
 			if child != enemyAudio:
 				remove_child(child)
 				child.queue_free()
 		
-		enemyAudio.enemyDestructionAudioPlay()
 		var effect = enemyExplosion.instantiate()
 		effect.position = position
 		get_tree().current_scene.add_child(effect)
@@ -48,6 +49,7 @@ func damage(amount):
 		Signals.emit_signal("on_score_increment",1)
 		
 func fire():
+	enemyAudio.enemyDFireAudioPlay()
 	for child in WeaponPosition.get_children():
 		var bullet = pl_bullet.instantiate()
 		bullet.global_position = child.global_position
