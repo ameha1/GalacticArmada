@@ -41,6 +41,7 @@ func damage(amount):
 	meteor_damagePoint -= amount
 	
 	if  meteor_damagePoint <= 0:
+		meteorAudio.meteorDestructiomAudioPlay()
 		for child in get_children():
 			if child != meteorAudio:
 				remove_child(child)
