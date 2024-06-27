@@ -22,9 +22,6 @@ func _process(delta):
 	
 	if playerInArea != null:
 		playerInArea.damage(1)
-		
-	if meteor_damagePoint <= 0:
-		queue_free()
 	
 func _physics_process(delta):
 
@@ -32,24 +29,26 @@ func _physics_process(delta):
 	position.y += speed * delta
 	
 func _on_visible_on_screen_notifier_2d_screen_exited():
-
 	queue_free()
 
 func damage(amount):
-
 	meteorAudio.meteorHitAudioPlay()
 	meteor_damagePoint -= amount
 	
 	if  meteor_damagePoint <= 0:
 		meteorAudio.meteorDestructiomAudioPlay()
+		
 		for child in get_children():
 			if child != meteorAudio:
 				remove_child(child)
 				child.queue_free()
-	
+		
 		var effect = meteorEffect.instantiate()
 		effect.position = position
 		get_tree().current_scene.add_child(effect)
+		
+		hide()
+		
 		Signals.emit_signal("on_score_increment",1)
 
 func _on_area_entered(area):
