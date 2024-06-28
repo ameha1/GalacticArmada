@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://dlyay5e6hwkyy"]
+
+[ext_resource type="AudioStream" uid="uid://cdl461xe6f5kh" path="res://Assets/Audio/laserSmall_001.ogg" id="1_6y8yf"]
+[ext_resource type="Script" path="res://Scripts/player_audio.gd" id="1_p6pe6"]
+[ext_resource type="AudioStream" uid="uid://do8y7lta50h68" path="res://Assets/Audio/forceField_000.ogg" id="2_1psh1"]
+[ext_resource type="AudioStream" uid="uid://df1hcmbl4g56x" path="res://Assets/Audio/spaceEngineLow_001.ogg" id="3_v2jx4"]
+[ext_resource type="AudioStream" uid="uid://cr2p4jpajw442" path="res://Assets/Audio/explosionCrunch_000.ogg" id="5_s0o1q"]
+
+[node name="PlayerAudio" type="Node"]
+script = ExtResource("1_p6pe6")
+
+[node name="playerFireAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_6y8yf")
+
+[node name="playerShieldAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_1psh1")
+pitch_scale = 0.4
+
+[node name="playerFuelAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_v2jx4")
+volume_db = -15.0
+
+[node name="playerDestructionAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_s0o1q")
+volume_db = -15.0
+pitch_scale = 0.8
