@@ -18,9 +18,7 @@ var velocity = Vector2(0,0)
 @onready var fuel1 = $Fuel
 @onready var fuel2 = $Fuel2
 
-@onready var fireAudio = $FireAudio
-@onready var shieldAudio = $ShieldAudio
-@onready var fuelAudio = $FuelAudio
+@onready var playerAudio = $PlayerAudio
 
 @export var normalFireDelay = 0.2
 @export var rapidFireDelay = 0.08
@@ -31,7 +29,7 @@ var timeout = false
 
 func _ready():
 	
-	fuelAudio.play()
+	playerAudio.playerFuelAudioPlay()
 	
 	shield_activated.hide()
 	Signals.openingScene_notifier.connect(player_state)
@@ -51,8 +49,8 @@ func _physics_process(delta):
 	var dir_vector = Vector2(0,0)
 
 	if Input.is_action_just_pressed("accelerate"):
-		if fuelAudio.pitch_scale <= 3:
-			fuelAudio.pitch_scale += 0.1
+		if playerAudio.playerFuelAudio.pitch_scale <= 3:
+			playerAudio.playerFuelAudio.pitch_scale += 0.1
 			
 		if fuel1.amount <= 6:
 			fuel1.amount += 1 
@@ -62,8 +60,8 @@ func _physics_process(delta):
 		fuel2.lifetime = 0.25
 		
 	if Input.is_action_just_released("accelerate"):
-		if fuelAudio.pitch_scale >= 1:
-			fuelAudio.pitch_scale -= 0.1
+		if playerAudio.playerFuelAudio.pitch_scale >= 1:
+			playerAudio.playerFuelAudio.pitch_scale -= 0.1
 		if fuel1.amount >= 3:
 			fuel1.amount -= 1 
 		fuel1.lifetime = 0.2
@@ -78,7 +76,7 @@ func _physics_process(delta):
 		dir_vector.x = -1
 
 	if Input.is_action_pressed("shoot") and coolDownTimer.is_stopped():
-		fireAudio.play()
+		playerAudio.playerFireAudioPlay()
 		coolDownTimer.start(fireDelay)
 		for child in weaponPositions.get_children():
 			var bullet = pl_bullet.instantiate()
@@ -119,17 +117,20 @@ func damage(amount):
 
 	Signals.emit_signal('on_playerLife_changed',shipLife)
 	Signals.emit_signal('shieldActivation',activated)
-	shieldAudio.play()
+	playerAudio.playerShieldAudioPlay()
 	
 	var view = get_tree().current_scene.find_child("View",true,false)
 	view.shake(3)
 	
 	if shipLife <= 0:
+		playerAudio.playerDestructionAudioPlay()
+		for child in get_children():
+			if child != playerAudio:
+				remove_child(child)
+				child.queue_free()
 		var effect = playerExplosion.instantiate()
 		effect.position = position
 		get_tree().current_scene.add_child(effect)
-
-		queue_free()
 
 func applyShield(time):
 	
@@ -139,7 +140,7 @@ func applyShield(time):
 		activated = true
 		return
 	
-	shieldAudio.play()
+	playerAudio.playerShieldAudioPlay()
 	
 	invinsibilityTimer.start(time)
 
