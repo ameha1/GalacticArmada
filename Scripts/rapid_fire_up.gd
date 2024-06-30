@@ -1,6 +1,6 @@
 extends PowerUp
 
-var rapidFireTime = 5
+var rapidFireTime = 8
 
 func applyPowerShield(Player):
 	Player.applyRapidFire(rapidFireTime)

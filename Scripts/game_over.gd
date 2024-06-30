@@ -1,5 +1,8 @@
 extends Control
 
+@onready var GamePlay = $"../.."
+@onready var spawner = $"../../Spawner"
+
 @onready var gameOver = $gameOverPlayer
 @onready var screenTransition = $SceneTransition
 @onready var gamePause = $"../GamePause"
@@ -36,4 +39,8 @@ func game_Over():
 	if playerLife <= 0:
 		gameOver.play("gameover")
 		gamePause.hide()
-	
+		
+		for child in GamePlay.get_children():
+			if child == spawner:
+				remove_child(child)
+				child.queue_free()

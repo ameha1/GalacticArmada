@@ -1,12 +1,11 @@
-class_name ShieldPower
+class_name PowerUp
 extends Area2D
 
-@export var powerShieldSpeed = 0.5
+@export var powerShieldSpeed = 0.7
 @export var shieldTime = 6
 
 func _physics_process(delta):
 	position.y += powerShieldSpeed
-	pass
 
 func applyPowerShield(Player):
 	Player.applyShield(shieldTime)

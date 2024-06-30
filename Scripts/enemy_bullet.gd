@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name EnemyBullet
+
 @onready var p_bulletEffect = preload("res://Scenes/BulletScene/enemy_bullet_effect.tscn")
 
 @export var speed:float = 8

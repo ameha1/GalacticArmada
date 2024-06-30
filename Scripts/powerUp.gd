@@ -1,9 +1,6 @@
-extends ShieldPower
-
-@export var shieldTime = 6
+extends PowerUp
 
 func applyPowerShield(Player):
 	
-	Player.applyShield(shieldTime)
-	print('appylShield !')
+	Player.applyShield()
 	

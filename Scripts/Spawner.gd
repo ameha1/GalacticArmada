@@ -11,6 +11,7 @@ var preloadedEnemies = [
 
 var preloadedElements = [
 	preload("res://Scenes/ShieldPower/shieldPower.tscn"),
+	preload("res://Scenes/RapidFireUp/rapid_fire_up.tscn")
 
 ]
 
@@ -40,6 +41,7 @@ func _on_spawn_timer_timeout():
 		var enemyPreload = preloadedEnemies[randi() % preloadedEnemies.size()]
 		var enemy = enemyPreload.instantiate()
 		enemy.position = Vector2(xPos,position.y)
+		
 		get_tree().current_scene.add_child(enemy)
 		
 		
