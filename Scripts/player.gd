@@ -52,38 +52,44 @@ func _physics_process(delta):
 		if playerAudio.playerFuelAudio.pitch_scale <= 3:
 			playerAudio.playerFuelAudio.pitch_scale += 0.1
 			
-		if fuel1.amount <= 6:
-			fuel1.amount += 1 
-		fuel1.lifetime = 0.25
-		if fuel2.amount <= 6:
-			fuel2.amount += 1 
-		fuel2.lifetime = 0.25
+		if get_children().size() > 1:
+			if fuel1.amount <= 6:
+				fuel1.amount += 1 
+			fuel1.lifetime = 0.25
+			if fuel2.amount <= 6:
+				fuel2.amount += 1 
+			fuel2.lifetime = 0.25
 		
 	if Input.is_action_just_released("accelerate"):
 		if playerAudio.playerFuelAudio.pitch_scale >= 1:
 			playerAudio.playerFuelAudio.pitch_scale -= 0.1
-		if fuel1.amount >= 3:
-			fuel1.amount -= 1 
-		fuel1.lifetime = 0.2
-		if fuel2.amount >= 3:
-			fuel2.amount -= 1 
-		fuel2.lifetime = 0.2
+			
+		if get_children().size() > 1:
+			if fuel1.amount >= 3:
+				fuel1.amount -= 1 
+			fuel1.lifetime = 0.2
+			if fuel2.amount >= 3:
+				fuel2.amount -= 1 
+			fuel2.lifetime = 0.2
 
 	if  Input.is_action_pressed("turn_right"):
 		dir_vector.x = 1
 
 	if Input.is_action_pressed("turn_left"):
 		dir_vector.x = -1
+		
+	if get_children().size() > 1:
+		
+		if Input.is_action_pressed("shoot") and coolDownTimer.is_stopped():
+			playerAudio.playerFireAudioPlay()
+			
+			coolDownTimer.start(fireDelay)
+			for child in weaponPositions.get_children():
+				var bullet = pl_bullet.instantiate()
+				bullet.global_position = child.global_position
+				get_tree().current_scene.add_child(bullet)
 
-	if Input.is_action_pressed("shoot") and coolDownTimer.is_stopped():
-		playerAudio.playerFireAudioPlay()
-		coolDownTimer.start(fireDelay)
-		for child in weaponPositions.get_children():
-			var bullet = pl_bullet.instantiate()
-			bullet.global_position = child.global_position
-			get_tree().current_scene.add_child(bullet)
-
-		timeout=false
+			timeout=false
 	
 	velocity = dir_vector.normalized() * speed
 	
@@ -131,6 +137,8 @@ func damage(amount):
 		var effect = playerExplosion.instantiate()
 		effect.position = position
 		get_tree().current_scene.add_child(effect)
+		
+		playerAudio.playerFuelAudioStop()
 
 func applyShield(time):
 	

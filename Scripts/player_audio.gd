@@ -14,5 +14,8 @@ func playerShieldAudioPlay():
 func playerFuelAudioPlay():
 	playerFuelAudio.play()
 
+func playerFuelAudioStop():
+	playerFuelAudio.stop()
+
 func playerDestructionAudioPlay():
 	playerDestructionAudio.play()
