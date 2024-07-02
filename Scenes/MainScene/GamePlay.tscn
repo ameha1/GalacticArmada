@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://drev0g4nbcp2u"]
+[gd_scene load_steps=25 format=3 uid="uid://drev0g4nbcp2u"]
 
 [ext_resource type="Script" path="res://Scripts/GamePlay.gd" id="1_1e743"]
 [ext_resource type="PackedScene" uid="uid://b2tj4hphbtqry" path="res://Scenes/PlayerScene/Player.tscn" id="1_b1rdn"]
@@ -12,7 +12,12 @@
 [ext_resource type="Texture2D" uid="uid://5m73u0woskea" path="res://Assets/UI/Sprites/line-light/lineLight12.png" id="6_g3ab5"]
 [ext_resource type="Texture2D" uid="uid://yjcynmghdrkk" path="res://Assets/Partcles/star_04.png" id="6_ihxsk"]
 [ext_resource type="Script" path="res://Scripts/GamePause.gd" id="6_n3ivv"]
+[ext_resource type="Texture2D" uid="uid://cyj3rn7v4eji3" path="res://Assets/UI/Sprites/line-light/lineLight06.png" id="6_ri0mu"]
+[ext_resource type="Texture2D" uid="uid://b57u0oqindsbj" path="res://Assets/UI/Sprites/line-light/lineLight19.png" id="7_7maad"]
 [ext_resource type="Texture2D" uid="uid://c0b554yojxnie" path="res://Assets/UI/Sprites/line-light/lineLight14.png" id="7_ano31"]
+[ext_resource type="FontFile" uid="uid://dde0mcue8nclc" path="res://Assets/Fonts/Kenney Future.ttf" id="7_uwmxe"]
+[ext_resource type="Texture2D" uid="uid://ddghvcbh734mi" path="res://Assets/UI/Sprites/line-light/lineLight16.png" id="8_5ld65"]
+[ext_resource type="Texture2D" uid="uid://bdrw5y4o1fb4c" path="res://Assets/UI/Sprites/line-light/lineLight33.png" id="9_1jgb2"]
 [ext_resource type="Script" path="res://Scripts/View.gd" id="9_8rtis"]
 [ext_resource type="PackedScene" uid="uid://cjrsbjyyxa68h" path="res://Scenes/SceneTransition/screen_transition.tscn" id="11_ruflh"]
 
@@ -72,8 +77,8 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = 476.0
-offset_bottom = 476.0
+offset_top = 516.0
+offset_bottom = 516.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_yc3wn")
@@ -87,6 +92,10 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
+offset_left = 114.0
+offset_top = -190.0
+offset_right = -116.0
+offset_bottom = 86.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 13
@@ -99,30 +108,69 @@ theme_override_font_sizes/font_size = 28
 text = "Game Over"
 horizontal_alignment = 1
 
-[node name="Retry" type="Button" parent="CanvasLayer/GameOver/VBoxContainer"]
+[node name="scoreBoard" type="TextureRect" parent="CanvasLayer/GameOver/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.686275, 0.607843, 0.376471, 1)
-theme_override_fonts/font = ExtResource("4_krbl4")
-theme_override_font_sizes/font_size = 22
-text = "Retry"
-flat = true
+texture = ExtResource("6_ri0mu")
 
-[node name="About" type="Button" parent="CanvasLayer/GameOver/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.686275, 0.607843, 0.376471, 1)
-theme_override_fonts/font = ExtResource("4_krbl4")
-theme_override_font_sizes/font_size = 22
-text = "About"
-flat = true
+[node name="score" type="Label" parent="CanvasLayer/GameOver/VBoxContainer/scoreBoard"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 44.0
+offset_right = 111.0
+offset_bottom = 67.0
+theme_override_fonts/font = ExtResource("7_uwmxe")
+theme_override_font_sizes/font_size = 16
+text = "Score"
 
-[node name="Exit" type="Button" parent="CanvasLayer/GameOver/VBoxContainer"]
+[node name="scoreValue" type="Label" parent="CanvasLayer/GameOver/VBoxContainer/scoreBoard"]
+layout_mode = 0
+offset_left = 181.0
+offset_top = 44.0
+offset_right = 265.0
+offset_bottom = 67.0
+theme_override_fonts/font = ExtResource("7_uwmxe")
+theme_override_font_sizes/font_size = 16
+text = "0"
+
+[node name="bestScore" type="Label" parent="CanvasLayer/GameOver/VBoxContainer/scoreBoard"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 71.0
+offset_right = 111.0
+offset_bottom = 94.0
+theme_override_fonts/font = ExtResource("7_uwmxe")
+theme_override_font_sizes/font_size = 16
+text = "Best Score"
+
+[node name="bestScoreValue" type="Label" parent="CanvasLayer/GameOver/VBoxContainer/scoreBoard"]
+layout_mode = 0
+offset_left = 181.0
+offset_top = 71.0
+offset_right = 265.0
+offset_bottom = 94.0
+theme_override_fonts/font = ExtResource("7_uwmxe")
+theme_override_font_sizes/font_size = 16
+text = "0"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GameOver/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.686275, 0.607843, 0.376471, 1)
-theme_override_fonts/font = ExtResource("4_krbl4")
-theme_override_font_sizes/font_size = 22
-text = "Exit
-"
-flat = true
+theme_override_constants/separation = 38
+
+[node name="Retry" type="TextureButton" parent="CanvasLayer/GameOver/VBoxContainer/HBoxContainer"]
+modulate = Color(0.686275, 0.258824, 0.376471, 1)
+layout_mode = 2
+texture_normal = ExtResource("7_7maad")
+flip_h = true
+
+[node name="About" type="TextureButton" parent="CanvasLayer/GameOver/VBoxContainer/HBoxContainer"]
+modulate = Color(0.686275, 0.258824, 0.376471, 1)
+layout_mode = 2
+texture_normal = ExtResource("8_5ld65")
+
+[node name="Exit" type="TextureButton" parent="CanvasLayer/GameOver/VBoxContainer/HBoxContainer"]
+modulate = Color(0.686275, 0.258824, 0.376471, 1)
+layout_mode = 2
+texture_normal = ExtResource("9_1jgb2")
 
 [node name="gameOverPlayer" type="AnimationPlayer" parent="CanvasLayer/GameOver"]
 libraries = {
@@ -150,6 +198,7 @@ texture = ExtResource("6_don2f")
 
 [node name="PauseButton" type="TextureButton" parent="CanvasLayer/GamePause"]
 layout_direction = 1
+layout_mode = 0
 offset_left = 386.0
 offset_top = 19.0
 offset_right = 434.0
@@ -246,12 +295,13 @@ libraries = {
 }
 
 [node name="View" type="Camera2D" parent="."]
+position = Vector2(226, 327)
 anchor_mode = 0
 script = ExtResource("9_8rtis")
 
-[connection signal="pressed" from="CanvasLayer/GameOver/VBoxContainer/Retry" to="CanvasLayer/GameOver" method="_on_retry_pressed"]
-[connection signal="pressed" from="CanvasLayer/GameOver/VBoxContainer/About" to="CanvasLayer/GameOver" method="_on_about_pressed"]
-[connection signal="pressed" from="CanvasLayer/GameOver/VBoxContainer/Exit" to="CanvasLayer/GameOver" method="_on_exit_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameOver/VBoxContainer/HBoxContainer/Retry" to="CanvasLayer/GameOver" method="_on_retry_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameOver/VBoxContainer/HBoxContainer/About" to="CanvasLayer/GameOver" method="_on_about_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameOver/VBoxContainer/HBoxContainer/Exit" to="CanvasLayer/GameOver" method="_on_exit_pressed"]
 [connection signal="pressed" from="CanvasLayer/GamePause/PauseButton" to="CanvasLayer/GamePause" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GamePause/PlayButton" to="CanvasLayer/GamePause" method="_on_play_button_pressed"]
 [connection signal="timeout" from="Spawner/spawnTimer" to="Spawner" method="_on_spawn_timer_timeout"]
