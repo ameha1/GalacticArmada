@@ -7,6 +7,10 @@ extends Control
 @onready var screenTransition = $SceneTransition
 @onready var gamePause = $"../GamePause"
 
+@onready var scoreValue = $VBoxContainer/scoreBoard/scoreValue
+@onready var bestscoreValue = $VBoxContainer/scoreBoard/bestScoreValue
+@onready var hud = $"../HUD"
+
 var playerLife = 8
 var gameOverPullUp = false
 
@@ -14,7 +18,8 @@ func _ready():
 	Signals.on_playerLife_changed.connect(on_playerLife)
 
 func _process(delta):
-	pass
+	scoreValue.text = str(hud.setScore())
+	bestscoreValue.text = str(hud.rtrnScoresRecord())
 
 func _on_retry_pressed():
 	screenTransition.play("fade")
