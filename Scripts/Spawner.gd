@@ -45,20 +45,6 @@ func _on_spawn_timer_timeout():
 		#
 		#get_tree().current_scene.add_child(enemy)
 	
-	if score % 11 == 0:
-		var meteor = pMeteor.instantiate()
-		meteor.position = Vector2(xPos,position.y)
-		get_tree().current_scene.add_child(meteor)
-		
-	if score % 13 == 0:
-		var shield = preloadedShieldPower.instantiate()
-		shield.position = Vector2(xPos,position.y)
-		get_tree().current_scene.add_child(shield)
-		
-		var rapidFire = preloadedRapidFireUp.instantiate()
-		rapidFire.position = Vector2(xPos,position.y)
-		get_tree().current_scene.add_child(rapidFire)
-	
 	if score <= 50:
 		var steadyEnemy = preloadedSteadyEnemy.instantiate()
 		steadyEnemy.position = Vector2(xPos,position.y)
