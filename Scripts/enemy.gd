@@ -32,6 +32,9 @@ func damage(amount):
 	enemyAudio.enemyHitAudioPlay()
 	enemy_lives -= amount
 	
+	var view = get_tree().current_scene.find_child("View",true,false)
+	view.shake(3)
+	
 	if enemy_lives <= 0:
 		enemyAudio.enemyDestructionAudioPlay()
 		
