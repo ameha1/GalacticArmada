@@ -5,17 +5,26 @@
 [ext_resource type="Script" path="res://Scripts/rapid_fire_up.gd" id="2_rovtv"]
 
 [node name="RapidFireUp" instance=ExtResource("1_bxc57")]
+position = Vector2(160, 267)
+collision_layer = 256
 script = ExtResource("2_rovtv")
 
 [node name="Circle05" parent="." index="0"]
-modulate = Color(1, 1, 1, 0.337255)
-self_modulate = Color(0.686275, 0.258824, 0.376471, 1)
+modulate = Color(1, 1, 1, 0.596078)
+self_modulate = Color(0.686275, 0.607843, 0.376471, 1)
 
 [node name="Trace01" type="Sprite2D" parent="Circle05" index="0"]
-modulate = Color(1, 0.164706, 0.360784, 1)
-position = Vector2(-3.63635, 87.2727)
+modulate = Color(0.686275, 0.607843, 0.376471, 1)
+position = Vector2(1.35899e-05, 87.2727)
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("2_34bh8")
 
-[node name="Circle01" parent="Circle05" index="1"]
-modulate = Color(1, 0.164706, 0.360784, 1)
+[node name="Trace02" type="Sprite2D" parent="Circle05" index="1"]
+modulate = Color(0.686275, 0.607843, 0.376471, 1)
+position = Vector2(-94.5454, -2.28882e-05)
+rotation = 1.5708
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("2_34bh8")
+
+[node name="Circle01" parent="Circle05" index="2"]
+modulate = Color(0.686275, 0.607843, 0.376471, 1)
