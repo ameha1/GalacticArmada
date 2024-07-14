@@ -33,9 +33,9 @@ func _on_spawn_timer_timeout():
 	rapidFire.position = Vector2(xPos2,position.y)
 	get_tree().current_scene.add_child(rapidFire)
 	
-	nextSpawnTime += 1
+	nextSpawnTime += 5
 	
-	if nextSpawnTime < MIN_SPAWN_TIME:
+	if nextSpawnTime > MIN_SPAWN_TIME:
 		nextSpawnTime = MIN_SPAWN_TIME
 	
 	spawnTimer.start(nextSpawnTime)
