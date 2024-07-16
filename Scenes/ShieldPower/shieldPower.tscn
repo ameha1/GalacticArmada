@@ -8,18 +8,18 @@
 radius = 33.0606
 
 [node name="ShieldPower" type="Area2D"]
-position = Vector2(210, 248)
+position = Vector2(156, 267)
 script = ExtResource("1_87gv1")
 metadata/_edit_group_ = true
 
 [node name="Circle05" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.411765)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.275, 0.275)
 texture = ExtResource("1_omlod")
 
 [node name="Circle01" type="Sprite2D" parent="Circle05"]
 position = Vector2(-1.66666, -1.66669)
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.35, 0.35)
 texture = ExtResource("2_x7fqo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
