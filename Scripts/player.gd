@@ -126,7 +126,7 @@ func damage(amount):
 	playerAudio.playerShieldAudioPlay()
 	
 	var view = get_tree().current_scene.find_child("View",true,false)
-	view.shake(3)
+	view.shake(4)
 	
 	if shipLife <= 0:
 		playerAudio.playerDestructionAudioPlay()

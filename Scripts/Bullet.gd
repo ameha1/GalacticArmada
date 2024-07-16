@@ -19,8 +19,8 @@ func _on_area_entered(area):
 	bulletEffect.position = position
 	get_tree().current_scene.add_child(bulletEffect)
 	
-	var view = get_tree().current_scene.find_child("View",true,false)
-	view.shake(3)
+	#var view = get_tree().current_scene.find_child("View",true,false)
+	#view.shake(3)
 	
 	if area.is_in_group('damagable'):
 		area.damage(1)

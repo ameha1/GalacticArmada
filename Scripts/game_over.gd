@@ -18,6 +18,7 @@ func _ready():
 	Signals.on_playerLife_changed.connect(on_playerLife)
 
 func _process(delta):
+	
 	scoreValue.text = str(hud.setScore())
 	bestscoreValue.text = str(hud.rtrnScoresRecord())
 

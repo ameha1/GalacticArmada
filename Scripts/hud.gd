@@ -6,10 +6,11 @@ var plifeIcon = preload("res://Scenes/HUD/life_icon.tscn")
 @onready var Score = $Label
 @onready var spawnerTimeSetter = $"../.."
 
-var score: float = 0.0
+var score = 0
 var scoreRecord_res = "res://scoreRecord.txt"
 var scoreFile_W = FileAccess.open(scoreRecord_res,FileAccess.WRITE)
 var scoreFile_R = FileAccess.open(scoreRecord_res,FileAccess.READ)
+var scoreRecord = [0]
 
 func _ready():
 	clear_lives()
@@ -17,8 +18,8 @@ func _ready():
 	Signals.on_score_increment.connect(_on_score_increment)
 	
 func _process(delta):
-	pass
-	
+	print(scoreRecord)
+
 func clear_lives():
 	for child in lifeContainer.get_children():
 		lifeContainer.remove_child(child)
@@ -44,5 +45,4 @@ func setScore():
 func rtrnScoresRecord():
 	if FileAccess.file_exists(scoreRecord_res):
 		var bestscore = scoreFile_R.get_as_text()
-		print('bestscore - ')
-		return bestscore 
+		print(typeof(bestscore))
