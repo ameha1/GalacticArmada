@@ -179,3 +179,9 @@ func _on_rapid_fire_timer_timeout():
 
 func _on_shield_field_area_entered(area):
 	area.queue_free()
+	
+func RecordPlayerScores(score):
+	Signals.playerScores.append(score)
+
+func bestScoreRtrn():
+	return Signals.playerScores.max()
