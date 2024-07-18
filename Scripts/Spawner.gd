@@ -1,6 +1,7 @@
 extends Node2D
 
-const MIN_SPAWN_TIME = 1.5
+const MIN_SPAWN_TIME = 2
+const MAX_SPAWNTIME = 10
 
 @onready var spawnTimer = $spawnTimer
 
@@ -8,14 +9,12 @@ var preloadedSteadyEnemy = preload("res://Scenes/EnemyScene/enemy.tscn")
 var preloadedBouncerEnemy =  preload("res://Scenes/EnemyScene/bouncer_enemy.tscn")
 var pMeteor = preload("res://Scenes/MereorScene/meteor.tscn")
 
-
-var preloadedShieldPower = preload("res://Scenes/ShieldPower/shieldPower.tscn")
-var preloadedRapidFireUp = preload("res://Scenes/RapidFireUp/rapid_fire_up.tscn")
-
 @onready var HUDscore = $"../CanvasLayer/HUD"
 var score = 0 
 
-@export var nextSpawnTime = 10
+@export var nextSpawnTime = 3
+
+@export var phaseNTime = 10
 
 func _ready():
 	randomize()
@@ -23,6 +22,7 @@ func _ready():
 
 func _process(delta):
 	score = HUDscore.setScore()
+	#print('nextSpawnTime - ',nextSpawnTime,'  phaseNtime - ',phaseNTime)
 
 func _on_spawn_timer_timeout():
 	var viewRect = get_viewport_rect()
@@ -45,20 +45,29 @@ func _on_spawn_timer_timeout():
 		#
 		#get_tree().current_scene.add_child(enemy)
 	
-	if score <= 50:
+	if score <= 100:
 		var steadyEnemy = preloadedSteadyEnemy.instantiate()
 		steadyEnemy.position = Vector2(xPos,position.y)
 		get_tree().current_scene.add_child(steadyEnemy)
-	elif score <= 150:
+	if score >= 100:
 		var bouncerEnemy = preloadedBouncerEnemy.instantiate()
 		bouncerEnemy.position = Vector2(xPos,position.y)
 		get_tree().current_scene.add_child(bouncerEnemy)
 	
-	nextSpawnTime -= 0.1
+	nextSpawnTime -= 0.5
 	
 	if nextSpawnTime < MIN_SPAWN_TIME:
 		nextSpawnTime = MIN_SPAWN_TIME
 	
 	spawnTimer.start(nextSpawnTime)
 	
+	if nextSpawnTime == MIN_SPAWN_TIME:
+		
+		await get_tree().create_timer(phaseNTime).timeout
+		nextSpawnTime = MAX_SPAWNTIME
+		
+		if nextSpawnTime == MAX_SPAWNTIME:
+			nextSpawnTime -= 0.1
+			phaseNTime += 10
+
 	
