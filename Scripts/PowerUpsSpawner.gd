@@ -23,14 +23,18 @@ func _on_spawn_timer_timeout():
 	var viewRect = get_viewport_rect()
 	var xPos1 = randi_range(viewRect.position.x,viewRect.end.x)
 	var xPos2 = randi_range(viewRect.position.x,viewRect.end.x)
+	var yPos1 = randi_range(-200,-300)
+	var yPos2 = randi_range(-250,-300)
 
 	
 	var shield = preloadedShieldPower.instantiate()
-	shield.position = Vector2(xPos1,position.y)
+	shield.position = Vector2(xPos1,yPos1)
 	get_tree().current_scene.add_child(shield)
 	
+	await get_tree().create_timer(5).timeout
+	
 	var rapidFire = preloadedRapidFireUp.instantiate()
-	rapidFire.position = Vector2(xPos2,position.y)
+	rapidFire.position = Vector2(xPos2,yPos2)
 	get_tree().current_scene.add_child(rapidFire)
 	
 	nextSpawnTime += 5
