@@ -2,15 +2,11 @@ extends Node
 
 var plifeIcon = preload("res://Scenes/HUD/life_icon.tscn")
 
+@onready var score = 0
 @onready var lifeContainer = $LifeContainer
 @onready var Score = $Label
 @onready var spawnerTimeSetter = $"../.."
 @onready var player = $"../../Player"
-
-var score = 0
-var scoreRecord_res = "res://scoreRecord.txt"
-var scoreFile_W = FileAccess.open(scoreRecord_res,FileAccess.WRITE)
-var scoreFile_R = FileAccess.open(scoreRecord_res,FileAccess.READ)
 
 func _ready():
 	clear_lives()
@@ -29,7 +25,6 @@ func set_lives(lives):
 	for i in range(lives):
 		lifeContainer.add_child(plifeIcon.instantiate())
 	if lives <= 0:
-		#scoreFile_W.store_line(str(score))
 		player.RecordPlayerScores(score)
 	
 func _on_score_increment(amount):
