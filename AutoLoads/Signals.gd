@@ -12,6 +12,8 @@ signal playerBulletPosition(position)
 
 var playerScores = [0]
 
+var powerupSpeed
+
 var scoreRecord_res = "res://scoreRecord.txt"
 var scoreFile_W = FileAccess.open(scoreRecord_res,FileAccess.WRITE)
 var scoreFile_R = FileAccess.open(scoreRecord_res,FileAccess.READ)
