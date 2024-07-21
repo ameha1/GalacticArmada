@@ -9,6 +9,7 @@ radius = 33.0606
 
 [node name="ShieldPower" type="Area2D"]
 position = Vector2(156, 267)
+collision_layer = 256
 script = ExtResource("1_87gv1")
 metadata/_edit_group_ = true
 
