@@ -2,7 +2,6 @@ extends Area2D
 
 class_name Enemy
 
-@export var speed = 60
 @export var enemy_lives = 6
 
 @onready var WeaponPosition = $WeaponPosition
@@ -26,6 +25,7 @@ func _process(delta):
 		fire()
 	
 func _physics_process(delta):
+	var speed = Signals.enemySpeed
 	position.y += speed*delta
 
 func damage(amount):
