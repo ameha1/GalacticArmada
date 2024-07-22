@@ -17,6 +17,7 @@ func _ready():
 	
 	#ship flying enterance to the scene is initialized
 	Signals.powerupSpeed = 0.7
+	Signals.enemySpeed = 60
 	opener.play("opening_scene")
 
 func _process(delta):
@@ -24,12 +25,14 @@ func _process(delta):
 	if Input.is_action_pressed("accelerate"):
 		if Signals.powerupSpeed <= max_powerupSpeed:
 			Signals.powerupSpeed += 0.1
+			Signals.enemySpeed = 90
 		if stars.speed_scale <= max_starSpeed:
 			stars.speed_scale += 0.002
 	
 	else:
 		if Signals.powerupSpeed > min_powerupSpeed:
-			Signals.powerupSpeed -= 0.1
+			Signals.powerupSpeed -= 0.05
+			Signals.enemySpeed = 60
 		if stars.speed_scale >= 0.5:
 			stars.speed_scale -= 0.003
 
