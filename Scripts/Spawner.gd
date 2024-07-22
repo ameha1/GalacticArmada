@@ -7,12 +7,13 @@ const MAX_SPAWNTIME = 10
 
 var preloadedSteadyEnemy = preload("res://Scenes/EnemyScene/enemy.tscn")
 var preloadedBouncerEnemy =  preload("res://Scenes/EnemyScene/bouncer_enemy.tscn")
+var preloadedFastShooterEnemy = preload("res://Scenes/EnemyScene/fast_shooter_enemy.tscn")
 var pMeteor = preload("res://Scenes/MereorScene/meteor.tscn")
 
 @onready var HUDscore = $"../CanvasLayer/HUD"
 var score = 0 
 
-@export var nextSpawnTime = 3
+@export var nextSpawnTime = 10
 
 @export var phaseNTime = 10
 
@@ -49,11 +50,14 @@ func _on_spawn_timer_timeout():
 		var steadyEnemy = preloadedSteadyEnemy.instantiate()
 		steadyEnemy.position = Vector2(xPos,position.y)
 		get_tree().current_scene.add_child(steadyEnemy)
-	if score >= 100:
+	if score <= 200 and score > 100:
 		var bouncerEnemy = preloadedBouncerEnemy.instantiate()
 		bouncerEnemy.position = Vector2(xPos,position.y)
 		get_tree().current_scene.add_child(bouncerEnemy)
-	
+	if score <= 300 and score > 200:
+		var fastEnemy = preloadedFastShooterEnemy.instantiate()
+		fastEnemy.position = Vector2(xPos,position.y)
+		get_tree().current_scene.add_child(fastEnemy)
 	nextSpawnTime -= 0.5
 	
 	if nextSpawnTime < MIN_SPAWN_TIME:
@@ -65,9 +69,3 @@ func _on_spawn_timer_timeout():
 		
 		await get_tree().create_timer(phaseNTime).timeout
 		nextSpawnTime = MAX_SPAWNTIME
-		
-		if nextSpawnTime == MAX_SPAWNTIME:
-			nextSpawnTime -= 0.1
-			phaseNTime += 10
-
-	
