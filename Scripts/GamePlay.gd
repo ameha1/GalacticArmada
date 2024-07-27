@@ -31,7 +31,7 @@ func _process(delta):
 	
 	else:
 		if Signals.powerupSpeed > min_powerupSpeed:
-			Signals.powerupSpeed -= 0.05
+			Signals.powerupSpeed -= 0.005
 			Signals.enemySpeed = 60
 		if stars.speed_scale >= 0.5:
 			stars.speed_scale -= 0.003
