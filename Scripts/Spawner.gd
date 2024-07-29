@@ -17,12 +17,19 @@ var score = 0
 
 @export var phaseNTime = 10
 
+var target_position = Vector2()
+
 func _ready():
 	randomize()
 	spawnTimer.start(nextSpawnTime)
 
 func _process(delta):
 	score = HUDscore.setScore()
+	
+	Targets.steadyEnemyTargetPosition = target_position
+	Targets.bouncerEnemyTargetPosition = target_position
+	Targets.fastEnemyTargetPosition = target_position
+	
 	#print('nextSpawnTime - ',nextSpawnTime,'  phaseNtime - ',phaseNTime)
 
 func _on_spawn_timer_timeout():
@@ -50,14 +57,20 @@ func _on_spawn_timer_timeout():
 		var steadyEnemy = preloadedSteadyEnemy.instantiate()
 		steadyEnemy.position = Vector2(xPos,position.y)
 		get_tree().current_scene.add_child(steadyEnemy)
+		target_position = steadyEnemy.global_position
+		
 	if score <= 200 and score > 100:
 		var bouncerEnemy = preloadedBouncerEnemy.instantiate()
 		bouncerEnemy.position = Vector2(xPos,position.y)
 		get_tree().current_scene.add_child(bouncerEnemy)
+		target_position = bouncerEnemy.global_position
+		
 	if score <= 300 and score > 200:
 		var fastEnemy = preloadedFastShooterEnemy.instantiate()
 		fastEnemy.position = Vector2(xPos,position.y)
 		get_tree().current_scene.add_child(fastEnemy)
+		target_position = fastEnemy.global_position
+		
 	nextSpawnTime -= 0.5
 	
 	if nextSpawnTime < MIN_SPAWN_TIME:
