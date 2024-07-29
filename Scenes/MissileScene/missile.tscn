@@ -1,13 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://w2dsfdqodkvh"]
+[gd_scene load_steps=5 format=3 uid="uid://w2dsfdqodkvh"]
 
 [ext_resource type="PackedScene" uid="uid://c5vimnnen0ir2" path="res://Scenes/BulletScene/bullet.tscn" id="1_8urpr"]
 [ext_resource type="Script" path="res://Scripts/missile.gd" id="2_5yyuq"]
 [ext_resource type="Texture2D" uid="uid://cbwahnxr3sify" path="res://Assets/PNG/Sprites/Missiles/spaceMissiles_003.png" id="2_qkogo"]
+[ext_resource type="PackedScene" uid="uid://swnbao0y2sa0" path="res://Scenes/FuelScene/fuel.tscn" id="4_5vam7"]
 
 [node name="missile" instance=ExtResource("1_8urpr")]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("2_5yyuq")
+speed = 5.0
 
 [node name="Trace01" parent="." index="1"]
 modulate = Color(1, 1, 1, 0.976471)
 scale = Vector2(1, 1)
 texture = ExtResource("2_qkogo")
+
+[node name="Fuel" parent="." index="3" instance=ExtResource("4_5vam7")]
+position = Vector2(-4.76837e-07, 36)
+scale = Vector2(0.64, 0.8)
+color = Color(0.454902, 0.588235, 0.619608, 1)

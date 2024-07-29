@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://cyfi7afq7rjkk"]
+
+[ext_resource type="PackedScene" uid="uid://baphgjmcmiurk" path="res://Scenes/ShieldPower/shieldPower.tscn" id="1_0qbmw"]
+[ext_resource type="Script" path="res://Scripts/MissilePower.gd" id="2_5aptl"]
+[ext_resource type="Texture2D" uid="uid://cm68aved0jxe4" path="res://Assets/PNG/Sprites/Rockets/spaceRockets_002.png" id="2_443bk"]
+
+[node name="MissilePower" instance=ExtResource("1_0qbmw")]
+script = ExtResource("2_5aptl")
+
+[node name="Circle01" parent="Circle05" index="0"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_443bk")
