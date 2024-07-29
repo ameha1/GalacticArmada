@@ -1,10 +1,13 @@
 extends Area2D
 
 @export var speed:float = 5
+@onready var missile = $Trace01
 
 func _process(delta):
 	
 	global_position.y -= speed
+	missile.look_at(Targets.steadyEnemyTargetPosition)
+	missile.rotate(PI/2)
 	
 	global_position.x = move_toward(global_position.x,Targets.steadyEnemyTargetPosition.x,delta*100)
 	global_position.x = move_toward(global_position.x,Targets.bouncerEnemyTargetPosition.x,delta*100)
