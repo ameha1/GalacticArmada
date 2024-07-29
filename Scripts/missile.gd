@@ -1,12 +1,16 @@
 extends Area2D
 
-@export var speed:float = 8
+@export var speed:float = 5
 
 func _process(delta):
-	#print('Target_Position - ',Targets.steadyEnemyTargetPosition)
 	
 	global_position.y -= speed
-
+	
+	global_position.x = move_toward(global_position.x,Targets.steadyEnemyTargetPosition.x,delta*100)
+	global_position.x = move_toward(global_position.x,Targets.bouncerEnemyTargetPosition.x,delta*100)
+	global_position.x = move_toward(global_position.x,Targets.fastEnemyTargetPosition.x,delta*100)
+	
+	
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
