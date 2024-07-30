@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://uutjyh85wwos"]
+
+[ext_resource type="Script" path="res://Scripts/target_shot.gd" id="1_u1mki"]
+[ext_resource type="Texture2D" uid="uid://b0hibuvum3o05" path="res://Assets/UI/Sprites/line-light/lineLight09.png" id="1_xhv02"]
+
+[sub_resource type="Animation" id="Animation_e4ysl"]
+resource_name = "target_acquired"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6xdol"]
+_data = {
+"target_acquired": SubResource("Animation_e4ysl")
+}
+
+[node name="TargetShot" type="Node2D"]
+position = Vector2(150, 91)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_u1mki")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+offset_left = -80.0
+offset_top = -74.2857
+offset_right = 80.0
+offset_bottom = 85.7143
+texture = ExtResource("1_xhv02")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6xdol")
+}
