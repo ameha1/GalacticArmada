@@ -1,26 +1,50 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0fcmcb4wdou5"]
+[gd_scene load_steps=6 format=3 uid="uid://b0fcmcb4wdou5"]
 
 [ext_resource type="Script" path="res://Scripts/hud.gd" id="1_5c5gv"]
+[ext_resource type="Texture2D" uid="uid://be7xkovx6dq6d" path="res://Assets/PNG/Sprites/Rockets/spaceRockets_004.png" id="2_dko37"]
 [ext_resource type="FontFile" uid="uid://dey34fpcbngt1" path="res://Assets/Fonts/Kenney Blocks.ttf" id="2_vrroo"]
+[ext_resource type="FontFile" uid="uid://e1ld2hb8xn4p" path="res://Assets/Fonts/Kenney Pixel Square.ttf" id="3_e6wtr"]
+[ext_resource type="PackedScene" uid="uid://bgiobhvyui8c6" path="res://Scenes/HUD/life_icon.tscn" id="3_k2yba"]
 
 [node name="HUD" type="Node"]
 script = ExtResource("1_5c5gv")
 
-[node name="LifeContainer" type="HBoxContainer" parent="."]
-offset_left = 22.0
-offset_top = 30.0
-offset_right = 189.0
-offset_bottom = 70.0
-scale = Vector2(0.4, 0.4)
-theme_override_constants/separation = 5
-
-[node name="Label" type="Label" parent="."]
+[node name="score" type="Label" parent="."]
 texture_filter = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 23.0
+offset_bottom = 39.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("2_vrroo")
 theme_override_font_sizes/font_size = 25
 text = "0"
 horizontal_alignment = 1
+
+[node name="Container" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 10
+
+[node name="LifeContainer" type="HBoxContainer" parent="Container"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="LifeIcon" parent="Container/LifeContainer" instance=ExtResource("3_k2yba")]
+layout_mode = 2
+
+[node name="MissileContainer" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="missileHUD" type="TextureRect" parent="Container/MissileContainer"]
+modulate = Color(1, 1, 1, 0.756863)
+layout_mode = 2
+texture = ExtResource("2_dko37")
+expand_mode = 3
+
+[node name="missileLeft" type="Label" parent="Container/MissileContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_e6wtr")
+theme_override_font_sizes/font_size = 24
+text = "0"
