@@ -20,6 +20,7 @@ var velocity = Vector2(0,0)
 @onready var fuel1 = $Fuel
 @onready var fuel2 = $Fuel2
 @onready var missileLauncher = $MissileLauncher
+@onready var HUD = $"../CanvasLayer/HUD"
 
 @onready var playerAudio = $PlayerAudio
 
@@ -185,10 +186,13 @@ func player_state(state):
 		fuel2.lifetime = 0.2
 
 func launch_missile():
-	
 	launchMode = true
 	
-	if !missileLauncher.is_stopped():
+	if Signals.missileLeft <= 0 and Input.is_action_just_pressed("launch"):
+		HUD.low_missileSupply()
+		launchMode = false
+	
+	if Signals.missileLeft > 0 and Input.is_action_pressed("launch"):
 		
 		if coolDownTimer.is_stopped(): 
 			
@@ -201,6 +205,8 @@ func launch_missile():
 				bullet.global_position = child.global_position
 				
 				get_tree().current_scene.add_child(bullet)
+				
+				Signals.missileLeft -= 1
 				
 				timeout=false
 
@@ -224,4 +230,5 @@ func _on_missile_launcher_timeout():
 	launchMode = false
 
 func missileLaunchTimer(frame):
-	missileLauncher.start(frame)
+	#missileLauncher.start(frame)
+	pass
