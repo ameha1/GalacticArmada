@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://drev0g4nbcp2u"]
+[gd_scene load_steps=30 format=3 uid="uid://drev0g4nbcp2u"]
 
 [ext_resource type="Script" path="res://Scripts/GamePlay.gd" id="1_1e743"]
 [ext_resource type="PackedScene" uid="uid://b2tj4hphbtqry" path="res://Scenes/PlayerScene/Player.tscn" id="1_b1rdn"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://cjrsbjyyxa68h" path="res://Scenes/SceneTransition/screen_transition.tscn" id="11_ruflh"]
 [ext_resource type="Texture2D" uid="uid://k3x1jvggisur" path="res://Assets/UI/Sprites/shaded-light/shadedLight35.png" id="13_cmkdy"]
 [ext_resource type="Script" path="res://Scripts/PowerUpsSpawner.gd" id="22_ns07j"]
+[ext_resource type="Script" path="res://MeteorSpawner.gd" id="23_jnwsq"]
 
 [sub_resource type="Animation" id="Animation_7motl"]
 resource_name = "gameover"
@@ -286,7 +287,7 @@ scale_amount_min = 0.25
 scale_amount_max = 0.3
 
 [node name="EnemySpawner" type="Node2D" parent="."]
-position = Vector2(227, -93)
+position = Vector2(225, -14)
 script = ExtResource("5_gdaym")
 
 [node name="spawnTimer" type="Timer" parent="EnemySpawner"]
@@ -298,6 +299,12 @@ script = ExtResource("22_ns07j")
 
 [node name="spawnTimer" type="Timer" parent="PowerUpsSpawner"]
 wait_time = 8.0
+
+[node name="MeteorSpawner" type="Node2D" parent="."]
+position = Vector2(226, -407)
+script = ExtResource("23_jnwsq")
+
+[node name="spawnTimer" type="Timer" parent="MeteorSpawner"]
 
 [node name="Player" parent="." instance=ExtResource("1_b1rdn")]
 z_index = 100
@@ -320,4 +327,5 @@ script = ExtResource("9_8rtis")
 [connection signal="pressed" from="CanvasLayer/GamePause/PlayButton" to="CanvasLayer/GamePause" method="_on_play_button_pressed"]
 [connection signal="timeout" from="EnemySpawner/spawnTimer" to="EnemySpawner" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="PowerUpsSpawner/spawnTimer" to="PowerUpsSpawner" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="MeteorSpawner/spawnTimer" to="MeteorSpawner" method="_on_spawn_timer_timeout"]
 [connection signal="animation_finished" from="openingScene" to="." method="_on_opening_scene_animation_finished"]
