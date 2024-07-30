@@ -8,6 +8,7 @@ class_name Enemy
 @onready var enemyAudio = $EnemyAudio
 @onready var detectionZone = $DetectionZone
 @onready var collisionZone = $CollisionPolygon2D
+@onready var targetShot = $TargetShot
 
 var pl_bullet = preload("res://Scenes/BulletScene/enemy_bullet.tscn")
 var enemyExplosion = preload("res://Scenes/EnemyScene/enemy_explosion.tscn")
@@ -27,6 +28,8 @@ func _process(delta):
 func _physics_process(delta):
 	var speed = Signals.enemySpeed
 	position.y += speed*delta
+	
+	Targets.steadyEnemyTargetPosition.y = position.y
 
 func damage(amount):
 	enemyAudio.enemyHitAudioPlay()
@@ -68,6 +71,8 @@ func _on_cool_down_timeout():
 func _on_detection_zone_area_entered(area):
 	if area is Player:
 		Detection_Activation = true
+		if Signals.missileLeft > 0 and global_position.x == Targets.steadyEnemyTargetPosition.x:
+			targetEnemy()
 
 func _on_detection_zone_area_exited(area):
 	if area is Player:
@@ -82,3 +87,7 @@ func _on_area_entered(area):
 	
 	if area.is_in_group('damagable'):
 		area.damage(1)
+
+func targetEnemy():
+	targetShot.targetAcquired()
+	
