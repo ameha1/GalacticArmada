@@ -26,9 +26,8 @@ func _ready():
 func _process(delta):
 	score = HUDscore.setScore()
 	
-	Targets.steadyEnemyTargetPosition = target_position
-	Targets.bouncerEnemyTargetPosition = target_position
-	Targets.fastEnemyTargetPosition = target_position
+	Targets.steadyEnemyTargetPosition.x  = target_position.x
+	Targets.fastEnemyTargetPosition.x    = target_position.x
 	
 	#print('nextSpawnTime - ',nextSpawnTime,'  phaseNtime - ',phaseNTime)
 
@@ -74,7 +73,7 @@ func _on_spawn_timer_timeout():
 	nextSpawnTime -= 0.5
 	
 	if nextSpawnTime < MIN_SPAWN_TIME:
-		nextSpawnTime = MIN_SPAWN_TIME
+		nextSpawnTime = MAX_SPAWNTIME
 	
 	spawnTimer.start(nextSpawnTime)
 	
