@@ -64,6 +64,7 @@ func fire():
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
+	Targets.steadyEnemyTargetPosition = Vector2(0,0)
 
 func _on_cool_down_timeout():
 	timeOut = true
@@ -84,6 +85,7 @@ func _on_area_entered(area):
 	get_tree().current_scene.add_child(point)
 	
 	Signals.emit_signal("on_score_increment",1)
+	
 	
 	if area.is_in_group('damagable'):
 		area.damage(1)
