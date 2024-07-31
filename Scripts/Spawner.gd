@@ -15,7 +15,7 @@ var score = 0
 
 @export var nextSpawnTime = 10
 
-@export var phaseNTime = 10
+@export var phaseNTime = 0
 
 var target_position = Vector2()
 
@@ -27,6 +27,7 @@ func _process(delta):
 	score = HUDscore.setScore()
 	
 	Targets.steadyEnemyTargetPosition.x  = target_position.x
+	#Targets.bouncerEnemyTargetPosition.x = target_position.x
 	Targets.fastEnemyTargetPosition.x    = target_position.x
 	
 	#print('nextSpawnTime - ',nextSpawnTime,'  phaseNtime - ',phaseNTime)
@@ -34,23 +35,6 @@ func _process(delta):
 func _on_spawn_timer_timeout():
 	var viewRect = get_viewport_rect()
 	var xPos = randi_range(viewRect.position.x,viewRect.end.x)
-	
-	#if randf() < 0.1:
-		#var meteor = pMeteor.instantiate()
-		#meteor.position = Vector2(xPos,position.y)
-		#get_tree().current_scene.add_child(meteor)
-		#
-		#var elementsPreload = preloadedElements[randi() % preloadedElements.size()]
-		#var element = elementsPreload.instantiate()
-		#element.position = Vector2(xPos,position.y)
-		#get_tree().current_scene.add_child(element)
-		#
-	#else:
-		#var enemyPreload = preloadedEnemies[randi() % preloadedEnemies.size()]
-		#var enemy = enemyPreload.instantiate()
-		#enemy.position = Vector2(xPos,position.y)
-		#
-		#get_tree().current_scene.add_child(enemy)
 	
 	if score <= 100:
 		var steadyEnemy = preloadedSteadyEnemy.instantiate()
@@ -64,20 +48,22 @@ func _on_spawn_timer_timeout():
 		get_tree().current_scene.add_child(bouncerEnemy)
 		target_position = bouncerEnemy.global_position
 		
-	if score <= 300 and score > 200:
+	if score <= 600 and score > 200:
 		var fastEnemy = preloadedFastShooterEnemy.instantiate()
 		fastEnemy.position = Vector2(xPos,position.y)
 		get_tree().current_scene.add_child(fastEnemy)
 		target_position = fastEnemy.global_position
 		
-	nextSpawnTime -= 0.5
-	
-	if nextSpawnTime < MIN_SPAWN_TIME:
-		nextSpawnTime = MAX_SPAWNTIME
-	
 	spawnTimer.start(nextSpawnTime)
 	
 	if nextSpawnTime == MIN_SPAWN_TIME:
-		
+		#print('waiting for 10 seconds')
 		await get_tree().create_timer(phaseNTime).timeout
 		nextSpawnTime = MAX_SPAWNTIME
+		nextSpawnTime += 2
+
+	if nextSpawnTime == MAX_SPAWNTIME:
+		phaseNTime += 10
+		
+	nextSpawnTime -= 2
+	
