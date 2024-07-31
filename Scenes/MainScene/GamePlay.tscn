@@ -24,7 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://cjrsbjyyxa68h" path="res://Scenes/SceneTransition/screen_transition.tscn" id="11_ruflh"]
 [ext_resource type="Texture2D" uid="uid://k3x1jvggisur" path="res://Assets/UI/Sprites/shaded-light/shadedLight35.png" id="13_cmkdy"]
 [ext_resource type="Script" path="res://Scripts/PowerUpsSpawner.gd" id="22_ns07j"]
-[ext_resource type="Script" path="res://MeteorSpawner.gd" id="23_jnwsq"]
+[ext_resource type="Script" path="res://Scripts/MeteorSpawner.gd" id="23_65hse"]
 
 [sub_resource type="Animation" id="Animation_7motl"]
 resource_name = "gameover"
@@ -302,7 +302,7 @@ wait_time = 8.0
 
 [node name="MeteorSpawner" type="Node2D" parent="."]
 position = Vector2(226, -407)
-script = ExtResource("23_jnwsq")
+script = ExtResource("23_65hse")
 
 [node name="spawnTimer" type="Timer" parent="MeteorSpawner"]
 
