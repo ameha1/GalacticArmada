@@ -149,6 +149,7 @@ func damage(amount):
 		effect.position = position
 		get_tree().current_scene.add_child(effect)
 		
+		launchMode = false
 		playerAudio.playerFuelAudioStop()
 
 func applyShield(time):
