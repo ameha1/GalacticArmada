@@ -109,7 +109,7 @@ func _physics_process(delta):
 	
 	var viewRect = get_viewport_rect()
 	
-	position.x = clamp(position.x, 20, viewRect.size.x)
+	position.x = clamp(position.x, 40, viewRect.size.x-60)
 	position.y = clamp(position.y, 20, viewRect.size.y)
 	
 func _on_cool_down_timeout():
