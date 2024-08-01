@@ -34,7 +34,7 @@ func _process(delta):
 
 func _on_spawn_timer_timeout():
 	var viewRect = get_viewport_rect()
-	var xPos = randi_range(viewRect.position.x,viewRect.end.x)
+	var xPos = randi_range(viewRect.position.x+20,viewRect.end.x-20)
 	
 	if score <= 100:
 		var steadyEnemy = preloadedSteadyEnemy.instantiate()
