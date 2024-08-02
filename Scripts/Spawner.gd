@@ -11,10 +11,11 @@ var preloadedFastShooterEnemy = preload("res://Scenes/EnemyScene/fast_shooter_en
 var pMeteor = preload("res://Scenes/MereorScene/meteor.tscn")
 
 @onready var HUDscore = $"../CanvasLayer/HUD"
+@onready var targetShot = $"../TargetShot"
+
 var score = 0 
 
 @export var nextSpawnTime = 10
-
 @export var phaseNTime = 0
 
 var target_position = Vector2()
@@ -26,12 +27,23 @@ func _ready():
 func _process(delta):
 	score = HUDscore.setScore()
 	
-	Targets.steadyEnemyTargetPosition.x  = target_position.x
-	#Targets.bouncerEnemyTargetPosition.x = target_position.x
-	Targets.fastEnemyTargetPosition.x    = target_position.x
+	if Signals.missileLeft <= 0:
+		targetShot.targetLost()
 	
-	#print('nextSpawnTime - ',nextSpawnTime,'  phaseNtime - ',phaseNTime)
+	if Signals.missileLeft > 0:
+		if score <= 100:
+			targetShot.global_position = Targets.steadyEnemyTargetPosition
+		elif score <= 200 and score > 100:
+			targetShot.global_position = Targets.bouncerEnemyTargetPosition
+		elif score <= 600 and score > 200:
+			targetShot.global_position = Targets.fastEnemyTargetPosition
 
+		targetShot.targetAcquired()
+	
+	
+	Targets.steadyEnemyTargetPosition.x  = target_position.x
+	Targets.fastEnemyTargetPosition.x    = target_position.x
+	#print('nextSpawnTime - ',nextSpawnTime,'  phaseNtime - ',phaseNTime)
 func _on_spawn_timer_timeout():
 	var viewRect = get_viewport_rect()
 	var xPos = randi_range(viewRect.position.x+20,viewRect.end.x-20)
