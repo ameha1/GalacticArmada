@@ -80,11 +80,9 @@ func _physics_process(delta):
 
 	if  Input.is_action_pressed("turn_right"):
 		dir_vector.x = 1
-		rotation = -25
-
+		
 	if Input.is_action_pressed("turn_left"):
 		dir_vector.x = -1
-		rotation = 25
 		
 	if get_children().size() > 1:
 		
@@ -116,14 +114,14 @@ func _on_cool_down_timeout():
 	timeout = true
 
 func damage(amount):
+	shieldField.monitoring = true
+	shieldField.monitorable = true
+	
 	var activated = false
 	
 	if not invinsibilityTimer.is_stopped():
 		activated = true
 		return
-	
-	shieldField.monitoring = true
-	shieldField.monitorable = true
 	
 	invinsibilityTimer.start(3)
 
