@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://drev0g4nbcp2u"]
+[gd_scene load_steps=31 format=3 uid="uid://drev0g4nbcp2u"]
 
 [ext_resource type="Script" path="res://Scripts/GamePlay.gd" id="1_1e743"]
 [ext_resource type="PackedScene" uid="uid://b2tj4hphbtqry" path="res://Scenes/PlayerScene/Player.tscn" id="1_b1rdn"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://k3x1jvggisur" path="res://Assets/UI/Sprites/shaded-light/shadedLight35.png" id="13_cmkdy"]
 [ext_resource type="Script" path="res://Scripts/PowerUpsSpawner.gd" id="22_ns07j"]
 [ext_resource type="Script" path="res://Scripts/MeteorSpawner.gd" id="23_65hse"]
+[ext_resource type="PackedScene" uid="uid://uutjyh85wwos" path="res://Scenes/OnTargetShot/target_shot.tscn" id="26_0080p"]
 
 [sub_resource type="Animation" id="Animation_7motl"]
 resource_name = "gameover"
@@ -319,6 +320,8 @@ libraries = {
 position = Vector2(226, 327)
 anchor_mode = 0
 script = ExtResource("9_8rtis")
+
+[node name="TargetShot" parent="." instance=ExtResource("26_0080p")]
 
 [connection signal="pressed" from="CanvasLayer/GameOver/VBoxContainer/HBoxContainer/Retry" to="CanvasLayer/GameOver" method="_on_retry_pressed"]
 [connection signal="pressed" from="CanvasLayer/GameOver/VBoxContainer/HBoxContainer/About" to="CanvasLayer/GameOver" method="_on_about_pressed"]
