@@ -30,6 +30,7 @@ func _physics_process(delta):
 	position.y += speed*delta
 	
 	Targets.steadyEnemyTargetPosition.y = position.y
+	Targets.fastEnemyTargetPosition.y = position.y
 
 func damage(amount):
 	enemyAudio.enemyHitAudioPlay()
