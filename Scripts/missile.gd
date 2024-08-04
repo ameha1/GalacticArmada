@@ -2,7 +2,7 @@ extends Area2D
 
 @onready var p_bulletEffect = preload("res://Scenes/BulletScene/bullet_effect.tscn")
 
-@export var speed:float = 20
+@export var speed:float = 25
 @onready var missile = $Trace01
 @onready var fuel = $Trace01/Fuel
 
