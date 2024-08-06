@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://drev0g4nbcp2u"]
+[gd_scene load_steps=35 format=3 uid="uid://drev0g4nbcp2u"]
 
 [ext_resource type="Script" path="res://Scripts/GamePlay.gd" id="1_1e743"]
 [ext_resource type="PackedScene" uid="uid://b2tj4hphbtqry" path="res://Scenes/PlayerScene/Player.tscn" id="1_b1rdn"]
@@ -23,6 +23,10 @@
 [ext_resource type="Texture2D" uid="uid://cdurt2ohte8lu" path="res://Assets/UI/Sprites/shaded-light/shadedLight18.png" id="11_agya1"]
 [ext_resource type="PackedScene" uid="uid://cjrsbjyyxa68h" path="res://Scenes/SceneTransition/screen_transition.tscn" id="11_ruflh"]
 [ext_resource type="Texture2D" uid="uid://k3x1jvggisur" path="res://Assets/UI/Sprites/shaded-light/shadedLight35.png" id="13_cmkdy"]
+[ext_resource type="FontFile" uid="uid://ba4oi1sigskrp" path="res://Assets/Fonts/Kenney Future Narrow.ttf" id="18_xofu2"]
+[ext_resource type="Texture2D" uid="uid://5ds45y0env3u" path="res://Assets/UI/Sprites/line-light/lineLight43.png" id="19_kj5l3"]
+[ext_resource type="Texture2D" uid="uid://d2kfw0l5lay6a" path="res://Assets/UI/Sprites/line-light/lineLight47.png" id="20_sm0cb"]
+[ext_resource type="Texture2D" uid="uid://h1cihagrtihg" path="res://Assets/UI/Sprites/line-light/lineLight49.png" id="21_pfm5f"]
 [ext_resource type="Script" path="res://Scripts/PowerUpsSpawner.gd" id="22_ns07j"]
 [ext_resource type="Script" path="res://Scripts/MeteorSpawner.gd" id="23_65hse"]
 [ext_resource type="PackedScene" uid="uid://uutjyh85wwos" path="res://Scenes/OnTargetShot/target_shot.tscn" id="26_0080p"]
@@ -223,6 +227,79 @@ offset_right = 434.0
 offset_bottom = 67.0
 action_mode = 0
 texture_normal = ExtResource("7_ano31")
+
+[node name="HowToPlay" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchor_top = 0.296
+anchor_right = 1.002
+anchor_bottom = 0.566
+offset_top = 63.192
+offset_right = -0.900055
+offset_bottom = 63.232
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="right" type="Label" parent="CanvasLayer/HowToPlay"]
+layout_mode = 0
+offset_left = 295.0
+offset_top = 72.0
+offset_right = 372.0
+offset_bottom = 101.0
+theme_override_fonts/font = ExtResource("18_xofu2")
+theme_override_font_sizes/font_size = 25
+text = "Right
+"
+
+[node name="left" type="Label" parent="CanvasLayer/HowToPlay"]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 72.0
+offset_right = 164.0
+offset_bottom = 101.0
+theme_override_fonts/font = ExtResource("18_xofu2")
+theme_override_font_sizes/font_size = 25
+text = "left
+"
+
+[node name="shoot" type="Label" parent="CanvasLayer/HowToPlay"]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 316.0
+offset_right = 200.0
+offset_bottom = 345.0
+theme_override_fonts/font = ExtResource("18_xofu2")
+theme_override_font_sizes/font_size = 25
+text = "space
+"
+
+[node name="launch" type="Label" parent="CanvasLayer/HowToPlay"]
+layout_mode = 0
+offset_left = 268.0
+offset_top = 316.0
+offset_right = 358.0
+offset_bottom = 345.0
+theme_override_fonts/font = ExtResource("18_xofu2")
+theme_override_font_sizes/font_size = 25
+text = "L"
+
+[node name="LineLight43" type="Sprite2D" parent="CanvasLayer/HowToPlay"]
+position = Vector2(334, 158)
+texture = ExtResource("19_kj5l3")
+
+[node name="LineLight44" type="Sprite2D" parent="CanvasLayer/HowToPlay"]
+position = Vector2(141, 160)
+texture = ExtResource("19_kj5l3")
+flip_h = true
+
+[node name="LineLight47" type="Sprite2D" parent="CanvasLayer/HowToPlay"]
+position = Vector2(178, 272)
+texture = ExtResource("20_sm0cb")
+
+[node name="LineLight49" type="Sprite2D" parent="CanvasLayer/HowToPlay"]
+position = Vector2(300, 275)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("21_pfm5f")
 
 [node name="DarkBackGround" type="Sprite2D" parent="."]
 z_index = -100
