@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://drev0g4nbcp2u"]
+[gd_scene load_steps=39 format=3 uid="uid://drev0g4nbcp2u"]
 
 [ext_resource type="Script" path="res://Scripts/GamePlay.gd" id="1_1e743"]
 [ext_resource type="PackedScene" uid="uid://b2tj4hphbtqry" path="res://Scenes/PlayerScene/Player.tscn" id="1_b1rdn"]
@@ -28,7 +28,11 @@
 [ext_resource type="Texture2D" uid="uid://d2kfw0l5lay6a" path="res://Assets/UI/Sprites/line-light/lineLight47.png" id="20_sm0cb"]
 [ext_resource type="Texture2D" uid="uid://h1cihagrtihg" path="res://Assets/UI/Sprites/line-light/lineLight49.png" id="21_pfm5f"]
 [ext_resource type="Script" path="res://Scripts/PowerUpsSpawner.gd" id="22_ns07j"]
+[ext_resource type="Texture2D" uid="uid://deakpistpbctm" path="res://Assets/UI/Sprites/line-light/lineLight23.png" id="22_pj0rj"]
+[ext_resource type="Script" path="res://Scripts/Controllers.gd" id="22_x58vb"]
 [ext_resource type="Script" path="res://Scripts/MeteorSpawner.gd" id="23_65hse"]
+[ext_resource type="Texture2D" uid="uid://chocs42wnr3mn" path="res://Assets/UI/Sprites/line-light/lineLight24.png" id="23_n7b88"]
+[ext_resource type="Texture2D" uid="uid://bwlnnq44v2uu1" path="res://Assets/UI/Sprites/line-light/lineLight46.png" id="23_x2bfa"]
 [ext_resource type="PackedScene" uid="uid://uutjyh85wwos" path="res://Scenes/OnTargetShot/target_shot.tscn" id="26_0080p"]
 
 [sub_resource type="Animation" id="Animation_7motl"]
@@ -301,6 +305,55 @@ position = Vector2(300, 275)
 scale = Vector2(0.85, 0.85)
 texture = ExtResource("21_pfm5f")
 
+[node name="Controllers" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 487.0
+offset_right = 448.0
+offset_bottom = 488.0
+script = ExtResource("22_x58vb")
+
+[node name="MoveLeft" type="TextureButton" parent="CanvasLayer/Controllers"]
+offset_top = 80.0
+offset_right = 80.0
+offset_bottom = 160.0
+scale = Vector2(0.86, 0.86)
+texture_normal = ExtResource("22_pj0rj")
+flip_h = true
+
+[node name="MoveRight" type="TextureButton" parent="CanvasLayer/Controllers"]
+offset_left = 79.0
+offset_top = 80.0
+offset_right = 159.0
+offset_bottom = 160.0
+scale = Vector2(0.86, 0.86)
+texture_normal = ExtResource("22_pj0rj")
+
+[node name="MoveForward" type="TextureButton" parent="CanvasLayer/Controllers"]
+offset_left = 41.0
+offset_top = 18.0
+offset_right = 121.0
+offset_bottom = 98.0
+scale = Vector2(0.86, 0.86)
+texture_normal = ExtResource("23_n7b88")
+
+[node name="Shoot" type="TextureButton" parent="CanvasLayer/Controllers"]
+offset_left = 278.0
+offset_top = 80.0
+offset_right = 358.0
+offset_bottom = 160.0
+scale = Vector2(0.86, 0.86)
+texture_normal = ExtResource("20_sm0cb")
+
+[node name="Launch" type="TextureButton" parent="CanvasLayer/Controllers"]
+offset_left = 364.0
+offset_top = 80.0
+offset_right = 444.0
+offset_bottom = 160.0
+scale = Vector2(0.86, 0.86)
+texture_normal = ExtResource("23_x2bfa")
+
 [node name="DarkBackGround" type="Sprite2D" parent="."]
 z_index = -100
 position = Vector2(46, 40)
@@ -405,6 +458,14 @@ script = ExtResource("9_8rtis")
 [connection signal="pressed" from="CanvasLayer/GameOver/VBoxContainer/HBoxContainer/Exit" to="CanvasLayer/GameOver" method="_on_exit_pressed"]
 [connection signal="pressed" from="CanvasLayer/GamePause/PauseButton" to="CanvasLayer/GamePause" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GamePause/PlayButton" to="CanvasLayer/GamePause" method="_on_play_button_pressed"]
+[connection signal="button_up" from="CanvasLayer/Controllers/MoveLeft" to="CanvasLayer/Controllers" method="_on_move_left_button_up"]
+[connection signal="pressed" from="CanvasLayer/Controllers/MoveLeft" to="CanvasLayer/Controllers" method="_on_move_left_pressed"]
+[connection signal="pressed" from="CanvasLayer/Controllers/MoveLeft" to="Player" method="_on_move_left_pressed"]
+[connection signal="button_up" from="CanvasLayer/Controllers/MoveRight" to="CanvasLayer/Controllers" method="_on_move_right_button_up"]
+[connection signal="pressed" from="CanvasLayer/Controllers/MoveRight" to="CanvasLayer/Controllers" method="_on_move_right_pressed"]
+[connection signal="pressed" from="CanvasLayer/Controllers/MoveForward" to="CanvasLayer/Controllers" method="_on_move_forward_pressed"]
+[connection signal="pressed" from="CanvasLayer/Controllers/Shoot" to="CanvasLayer/Controllers" method="_on_shoot_pressed"]
+[connection signal="pressed" from="CanvasLayer/Controllers/Launch" to="CanvasLayer/Controllers" method="_on_launch_pressed"]
 [connection signal="timeout" from="EnemySpawner/spawnTimer" to="EnemySpawner" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="PowerUpsSpawner/spawnTimer" to="PowerUpsSpawner" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="MeteorSpawner/spawnTimer" to="MeteorSpawner" method="_on_spawn_timer_timeout"]
