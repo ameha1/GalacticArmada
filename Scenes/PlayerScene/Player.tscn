@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://b2tj4hphbtqry"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_nm6uw"]
-[ext_resource type="Texture2D" uid="uid://l6srsobptewi" path="res://Assets/PNG/Sprites/Ships/spaceShips_008.png" id="2_laj4l"]
+[ext_resource type="Texture2D" uid="uid://ujp161flf5dr" path="res://Assets/PNG/Sprites/Ships/spaceShips_001.png" id="2_me22p"]
 [ext_resource type="Texture2D" uid="uid://sbqvo5a1760u" path="res://Assets/Partcles/circle_04.png" id="3_cgl6o"]
 [ext_resource type="Texture2D" uid="uid://dpvx1fr5tag0" path="res://Assets/PNG/Sprites/Effects/spaceEffects_017.png" id="4_q16oy"]
 [ext_resource type="PackedScene" uid="uid://swnbao0y2sa0" path="res://Scenes/FuelScene/fuel.tscn" id="4_yfixc"]
@@ -22,7 +22,7 @@ polygon = PackedVector2Array(-24, 17, -30, -20, -18, -28, -7, -11, -4, -20, 9, -
 [node name="SpaceShips001" type="Sprite2D" parent="."]
 position = Vector2(2, 1)
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("2_laj4l")
+texture = ExtResource("2_me22p")
 flip_v = true
 
 [node name="WeaponPositions" type="Node2D" parent="."]
@@ -33,8 +33,12 @@ position = Vector2(-15, -22)
 [node name="position2" type="Node2D" parent="WeaponPositions"]
 position = Vector2(19, -22)
 
+[node name="MissilePosition" type="Node2D" parent="."]
+
+[node name="position" type="Node2D" parent="MissilePosition"]
+position = Vector2(2, -24)
+
 [node name="CoolDown" type="Timer" parent="."]
-wait_time = 0.6
 one_shot = true
 
 [node name="shield" type="Sprite2D" parent="."]
@@ -75,7 +79,11 @@ one_shot = true
 
 [node name="PlayerAudio" parent="." instance=ExtResource("6_v1xkj")]
 
+[node name="MissileLauncher" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="CoolDown" to="." method="_on_cool_down_timeout"]
 [connection signal="area_entered" from="shield/shieldField" to="." method="_on_shield_field_area_entered"]
 [connection signal="timeout" from="InvisibilityTimer" to="." method="_on_shield_activater_timeout"]
 [connection signal="timeout" from="RapidFireTimer" to="." method="_on_rapid_fire_timer_timeout"]
+[connection signal="timeout" from="MissileLauncher" to="." method="_on_missile_launcher_timeout"]
