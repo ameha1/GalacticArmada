@@ -32,6 +32,9 @@ var timeout = false
 var launchMode = false
 @export var shipLife = 3
 
+var dir_vector = Vector2()
+var turn_left
+
 func _ready():
 	
 	playerAudio.playerFuelAudioPlay()
@@ -51,21 +54,12 @@ func _process(delta):
 	pass
 
 func _physics_process(delta):
-	var dir_vector = Vector2(0,0)
+	dir_vector = Vector2(0,0)
 	rotation = 0
 	
 	if Input.is_action_just_pressed("accelerate"):
-		if playerAudio.playerFuelAudio.pitch_scale <= 3:
-			playerAudio.playerFuelAudio.pitch_scale += 0.1
-			
-		if get_children().size() > 1:
-			if fuel1.amount <= 6:
-				fuel1.amount += 1 
-			fuel1.lifetime = 0.25
-			if fuel2.amount <= 6:
-				fuel2.amount += 1 
-			fuel2.lifetime = 0.25
-		
+		move_forward()
+	
 	if Input.is_action_just_released("accelerate"):
 		if playerAudio.playerFuelAudio.pitch_scale >= 1:
 			playerAudio.playerFuelAudio.pitch_scale -= 0.1
@@ -79,26 +73,19 @@ func _physics_process(delta):
 			fuel2.lifetime = 0.2
 
 	if  Input.is_action_pressed("turn_right"):
-		dir_vector.x = 1
-		
+		move_right()
+	
 	if Input.is_action_pressed("turn_left"):
-		dir_vector.x = -1
+		move_left()
 		
+	turn_left=func move_Left():print('callable')
+	
+
 	if get_children().size() > 1:
 		
 		if Input.is_action_pressed("shoot") and coolDownTimer.is_stopped():
-			playerAudio.playerFireAudioPlay()
-			
-			coolDownTimer.start(fireDelay)
-			for child in weaponPositions.get_children():
-				var bullet = pl_bullet.instantiate()
-				
-				bullet.global_position = child.global_position
-				
-				get_tree().current_scene.add_child(bullet)
-				
-			timeout=false
-			
+			shoot()
+	
 	launch_activation()
 	
 	velocity = dir_vector.normalized() * speed
@@ -107,7 +94,7 @@ func _physics_process(delta):
 	
 	var viewRect = get_viewport_rect()
 	
-	position.x = clamp(position.x, 40, viewRect.size.x-60)
+	position.x = clamp(position.x, 40, viewRect.size.x-50)
 	position.y = clamp(position.y, 20, viewRect.size.y)
 	
 func _on_cool_down_timeout():
@@ -197,6 +184,8 @@ func launch_missile():
 			
 			coolDownTimer.start(3)
 			
+			playerAudio.playerMissileLaunchAudioPlay()
+			
 			for child in missilePosition.get_children():
 				
 				var bullet = pl_missile.instantiate()
@@ -230,4 +219,39 @@ func _on_missile_launcher_timeout():
 
 func missileLaunchTimer(frame):
 	#missileLauncher.start(frame)
+	pass
+
+func move_forward():
+	if playerAudio.playerFuelAudio.pitch_scale <= 3:
+		playerAudio.playerFuelAudio.pitch_scale += 0.1
+		
+	if get_children().size() > 1:
+		if fuel1.amount <= 6:
+			fuel1.amount += 1 
+		fuel1.lifetime = 0.25
+		if fuel2.amount <= 6:
+			fuel2.amount += 1 
+			fuel2.lifetime = 0.25
+	
+func move_right():
+	dir_vector.x = 1
+	
+func move_left():
+	dir_vector.x = -1
+
+func shoot():
+	playerAudio.playerFireAudioPlay()
+			
+	coolDownTimer.start(fireDelay)
+	
+	for child in weaponPositions.get_children():
+		var bullet = pl_bullet.instantiate()
+				
+		bullet.global_position = child.global_position
+				
+		get_tree().current_scene.add_child(bullet)
+				
+	timeout=false
+	
+func _on_move_left_pressed():
 	pass
