@@ -32,8 +32,8 @@ var timeout = false
 var launchMode = false
 @export var shipLife = 3
 
+
 var dir_vector = Vector2()
-var turn_left
 
 func _ready():
 	
@@ -77,10 +77,7 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("turn_left"):
 		move_left()
-		
-	turn_left=func move_Left():print('callable')
 	
-
 	if get_children().size() > 1:
 		
 		if Input.is_action_pressed("shoot") and coolDownTimer.is_stopped():
@@ -88,9 +85,9 @@ func _physics_process(delta):
 	
 	launch_activation()
 	
-	velocity = dir_vector.normalized() * speed
-	
-	position += velocity * delta
+	#velocity = dir_vector.normalized() * speed
+	#
+	#position += velocity * delta
 	
 	var viewRect = get_viewport_rect()
 	
@@ -236,22 +233,27 @@ func move_forward():
 func move_right():
 	dir_vector.x = 1
 	
+	velocity = dir_vector.normalized() * speed
+	position += velocity * 0.01666666666667
+	
 func move_left():
 	dir_vector.x = -1
+	
+	velocity = dir_vector.normalized() * speed
+	position += velocity * 0.01666666666667
 
 func shoot():
 	playerAudio.playerFireAudioPlay()
+	
+	if coolDownTimer.is_stopped():
 			
-	coolDownTimer.start(fireDelay)
-	
-	for child in weaponPositions.get_children():
-		var bullet = pl_bullet.instantiate()
-				
-		bullet.global_position = child.global_position
-				
-		get_tree().current_scene.add_child(bullet)
-				
-	timeout=false
-	
-func _on_move_left_pressed():
-	pass
+		coolDownTimer.start(fireDelay)
+		
+		for child in weaponPositions.get_children():
+			var bullet = pl_bullet.instantiate()
+					
+			bullet.global_position = child.global_position
+					
+			get_tree().current_scene.add_child(bullet)
+					
+		timeout=false
