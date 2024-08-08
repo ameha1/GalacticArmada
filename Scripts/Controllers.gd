@@ -2,36 +2,23 @@ extends Control
 
 @onready var player = $"../../Player"
 
-var move_right = false
-var move_left = false
+@onready var moveLeft = $MoveLeft
+@onready var moveRight = $MoveRight
+@onready var moveForward = $MoveForward
+@onready var shoot = $Shoot
+@onready var launch = $Launch
 
 func _physics_process(delta):
-	if move_right:
+	
+	if moveLeft.button_pressed:
 		player.move_left()
-	if move_right:
-		print('moveRight - ',move_right)
+	if moveRight.button_pressed:
 		player.move_right()
-		
-
-func _on_move_left_pressed():
-	move_left = true
-
-func _on_move_right_pressed():
-	move_right = true
-
-func _on_move_forward_pressed():
-	player.move_forward()
-
-func _on_shoot_pressed():
-	player.shoot()
-
-func _on_launch_pressed():
-	player.launch_missile()
-
-func _on_move_left_button_up():
-	#move_left = false
-	pass
-
-func _on_move_right_button_up():
-	#move_right = false
-	pass
+	if moveForward.button_pressed:
+		player.move_forward()
+	if shoot.button_pressed:
+		player.shoot()
+	if launch.button_pressed:
+		if Signals.missileLeft > 0:
+			player.launchMode = true
+			player.launch_activation()
