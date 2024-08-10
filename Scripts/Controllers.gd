@@ -20,5 +20,5 @@ func _physics_process(delta):
 		player.shoot()
 	if launch.button_pressed:
 		if Signals.missileLeft > 0:
-			player.launchMode = true
-			player.launch_activation()
+			player.activationMode = true
+                        player.missileLaunch()   
