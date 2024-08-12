@@ -212,11 +212,7 @@ func bestScoreRtrn():
 	return Signals.playerScores.max()
 
 func _on_missile_launcher_timeout():
-	launchMode = false
-
-func missileLaunchTimer(frame):
-	#missileLauncher.start(frame)
-	pass
+	launchMode = true
 
 func move_forward():
 	if playerAudio.playerFuelAudio.pitch_scale <= 3:
