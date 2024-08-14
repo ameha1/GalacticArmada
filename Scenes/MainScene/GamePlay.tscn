@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://drev0g4nbcp2u"]
+[gd_scene load_steps=33 format=3 uid="uid://drev0g4nbcp2u"]
 
 [ext_resource type="Script" path="res://Scripts/GamePlay.gd" id="1_1e743"]
 [ext_resource type="PackedScene" uid="uid://b2tj4hphbtqry" path="res://Scenes/PlayerScene/Player.tscn" id="1_b1rdn"]
@@ -8,13 +8,9 @@
 [ext_resource type="FontFile" uid="uid://dey34fpcbngt1" path="res://Assets/Fonts/Kenney Blocks.ttf" id="4_krbl4"]
 [ext_resource type="Script" path="res://Scripts/Spawner.gd" id="5_gdaym"]
 [ext_resource type="PackedScene" uid="uid://b0fcmcb4wdou5" path="res://Scenes/HUD/hud.tscn" id="5_wovpq"]
-[ext_resource type="Texture2D" uid="uid://d4md4d44x5i63" path="res://Assets/UI/Sprites/transparent-dark/transparentDark06.png" id="6_don2f"]
-[ext_resource type="Texture2D" uid="uid://5m73u0woskea" path="res://Assets/UI/Sprites/line-light/lineLight12.png" id="6_g3ab5"]
 [ext_resource type="Texture2D" uid="uid://yjcynmghdrkk" path="res://Assets/Partcles/star_04.png" id="6_ihxsk"]
-[ext_resource type="Script" path="res://Scripts/GamePause.gd" id="6_n3ivv"]
 [ext_resource type="Texture2D" uid="uid://cyj3rn7v4eji3" path="res://Assets/UI/Sprites/line-light/lineLight06.png" id="6_ri0mu"]
 [ext_resource type="Texture2D" uid="uid://b57u0oqindsbj" path="res://Assets/UI/Sprites/line-light/lineLight19.png" id="7_7maad"]
-[ext_resource type="Texture2D" uid="uid://c0b554yojxnie" path="res://Assets/UI/Sprites/line-light/lineLight14.png" id="7_ano31"]
 [ext_resource type="FontFile" uid="uid://dde0mcue8nclc" path="res://Assets/Fonts/Kenney Future.ttf" id="7_uwmxe"]
 [ext_resource type="Texture2D" uid="uid://ddghvcbh734mi" path="res://Assets/UI/Sprites/line-light/lineLight16.png" id="8_5ld65"]
 [ext_resource type="Texture2D" uid="uid://bdrw5y4o1fb4c" path="res://Assets/UI/Sprites/line-light/lineLight33.png" id="9_1jgb2"]
@@ -23,16 +19,14 @@
 [ext_resource type="Texture2D" uid="uid://cdurt2ohte8lu" path="res://Assets/UI/Sprites/shaded-light/shadedLight18.png" id="11_agya1"]
 [ext_resource type="PackedScene" uid="uid://cjrsbjyyxa68h" path="res://Scenes/SceneTransition/screen_transition.tscn" id="11_ruflh"]
 [ext_resource type="Texture2D" uid="uid://k3x1jvggisur" path="res://Assets/UI/Sprites/shaded-light/shadedLight35.png" id="13_cmkdy"]
+[ext_resource type="PackedScene" uid="uid://80lc6hml3pk4" path="res://Scenes/PauseGame/game_pause.tscn" id="14_kf3fp"]
 [ext_resource type="FontFile" uid="uid://ba4oi1sigskrp" path="res://Assets/Fonts/Kenney Future Narrow.ttf" id="18_xofu2"]
 [ext_resource type="Texture2D" uid="uid://5ds45y0env3u" path="res://Assets/UI/Sprites/line-light/lineLight43.png" id="19_kj5l3"]
+[ext_resource type="PackedScene" uid="uid://bx8eheq6qx2mx" path="res://Scenes/Controller/controllers.tscn" id="19_pb8c8"]
 [ext_resource type="Texture2D" uid="uid://d2kfw0l5lay6a" path="res://Assets/UI/Sprites/line-light/lineLight47.png" id="20_sm0cb"]
 [ext_resource type="Texture2D" uid="uid://h1cihagrtihg" path="res://Assets/UI/Sprites/line-light/lineLight49.png" id="21_pfm5f"]
 [ext_resource type="Script" path="res://Scripts/PowerUpsSpawner.gd" id="22_ns07j"]
-[ext_resource type="Texture2D" uid="uid://deakpistpbctm" path="res://Assets/UI/Sprites/line-light/lineLight23.png" id="22_pj0rj"]
-[ext_resource type="Script" path="res://Scripts/Controllers.gd" id="22_x58vb"]
 [ext_resource type="Script" path="res://Scripts/MeteorSpawner.gd" id="23_65hse"]
-[ext_resource type="Texture2D" uid="uid://chocs42wnr3mn" path="res://Assets/UI/Sprites/line-light/lineLight24.png" id="23_n7b88"]
-[ext_resource type="Texture2D" uid="uid://bwlnnq44v2uu1" path="res://Assets/UI/Sprites/line-light/lineLight46.png" id="23_x2bfa"]
 [ext_resource type="PackedScene" uid="uid://uutjyh85wwos" path="res://Scenes/OnTargetShot/target_shot.tscn" id="26_0080p"]
 
 [sub_resource type="Animation" id="Animation_7motl"]
@@ -48,7 +42,19 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 800), Vector2(0, 324)]
+"values": [Vector2(-400, 325), Vector2(0, 324)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_akrfa"]
@@ -81,18 +87,32 @@ _data = {
 script = ExtResource("1_1e743")
 max_starSpeed = 1
 
+[node name="DarkBackGround" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 391.0
+offset_bottom = 504.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_fmdpq")
+expand_mode = 1
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("5_wovpq")]
 
 [node name="GameOver" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = 516.0
-offset_bottom = 516.0
+offset_left = -400.0
+offset_top = 1.0
+offset_right = -400.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_yc3wn")
@@ -194,43 +214,7 @@ libraries = {
 "": SubResource("AnimationLibrary_akrfa")
 }
 
-[node name="GamePause" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("6_n3ivv")
-
-[node name="PauseBG" type="TextureRect" parent="CanvasLayer/GamePause"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_don2f")
-
-[node name="PauseButton" type="TextureButton" parent="CanvasLayer/GamePause"]
-layout_direction = 1
-layout_mode = 0
-offset_left = 386.0
-offset_top = 19.0
-offset_right = 434.0
-offset_bottom = 67.0
-action_mode = 0
-texture_normal = ExtResource("6_g3ab5")
-
-[node name="PlayButton" type="TextureButton" parent="CanvasLayer/GamePause"]
-layout_mode = 0
-offset_left = 386.0
-offset_top = 19.0
-offset_right = 434.0
-offset_bottom = 67.0
-action_mode = 0
-texture_normal = ExtResource("7_ano31")
+[node name="GamePause" parent="CanvasLayer" instance=ExtResource("14_kf3fp")]
 
 [node name="HowToPlay" type="Control" parent="CanvasLayer"]
 visible = false
@@ -305,122 +289,8 @@ position = Vector2(300, 275)
 scale = Vector2(0.85, 0.85)
 texture = ExtResource("21_pfm5f")
 
-[node name="Controllers" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 8.0
-offset_top = 487.0
-offset_right = 448.0
-offset_bottom = 488.0
-script = ExtResource("22_x58vb")
-
-[node name="MoveLeft" type="TextureButton" parent="CanvasLayer/Controllers"]
-layout_mode = 0
-offset_top = 80.0
-offset_right = 80.0
-offset_bottom = 160.0
-scale = Vector2(0.86, 0.86)
-texture_normal = ExtResource("22_pj0rj")
-flip_h = true
-
-[node name="MoveRight" type="TextureButton" parent="CanvasLayer/Controllers"]
-layout_mode = 0
-offset_left = 79.0
-offset_top = 80.0
-offset_right = 159.0
-offset_bottom = 160.0
-scale = Vector2(0.86, 0.86)
-texture_normal = ExtResource("22_pj0rj")
-
-[node name="MoveForward" type="TextureButton" parent="CanvasLayer/Controllers"]
-layout_mode = 0
-offset_left = 41.0
-offset_top = 18.0
-offset_right = 121.0
-offset_bottom = 98.0
-scale = Vector2(0.86, 0.86)
-texture_normal = ExtResource("23_n7b88")
-
-[node name="Shoot" type="TextureButton" parent="CanvasLayer/Controllers"]
-layout_mode = 0
-offset_left = 278.0
-offset_top = 80.0
-offset_right = 358.0
-offset_bottom = 160.0
-scale = Vector2(0.86, 0.86)
-texture_normal = ExtResource("20_sm0cb")
-
-[node name="Launch" type="TextureButton" parent="CanvasLayer/Controllers"]
-layout_mode = 0
-offset_left = 364.0
-offset_top = 80.0
-offset_right = 444.0
-offset_bottom = 160.0
-scale = Vector2(0.86, 0.86)
-texture_normal = ExtResource("23_x2bfa")
-
-[node name="DarkBackGround" type="Sprite2D" parent="."]
-z_index = -100
-position = Vector2(46, 40)
-scale = Vector2(0.16158, 0.1625)
-texture = ExtResource("1_fmdpq")
-centered = false
-offset = Vector2(-300, -250)
-
-[node name="stars" type="CPUParticles2D" parent="DarkBackGround"]
-position = Vector2(1039.73, -713.846)
-amount = 20
-lifetime = 8.0
-speed_scale = 0.5
-local_coords = true
-texture = ExtResource("2_lybst")
-emission_shape = 3
-emission_rect_extents = Vector2(1400, 1)
-spread = 90.0
-gravity = Vector2(0, 200)
-initial_velocity_min = 1.0
-initial_velocity_max = 100.0
-angular_velocity_min = 10.0
-angular_velocity_max = 25.0
-scale_amount_min = 0.25
-scale_amount_max = 0.3
-
-[node name="stars2" type="CPUParticles2D" parent="DarkBackGround"]
-position = Vector2(1021.17, -332.308)
-amount = 10
-lifetime = 8.0
-speed_scale = 0.25
-local_coords = true
-texture = ExtResource("6_ihxsk")
-emission_shape = 3
-emission_rect_extents = Vector2(1400, 1)
-spread = 90.0
-gravity = Vector2(0, 200)
-initial_velocity_min = 1.0
-initial_velocity_max = 100.0
-angular_velocity_min = 10.0
-angular_velocity_max = 25.0
-scale_amount_min = 0.25
-scale_amount_max = 0.3
-
-[node name="stars3" type="CPUParticles2D" parent="DarkBackGround"]
-position = Vector2(1163.51, 1618.46)
-amount = 20
-lifetime = 2.0
-speed_scale = 0.5
-randomness = 1.0
-local_coords = true
-texture = ExtResource("6_ihxsk")
-emission_shape = 3
-emission_rect_extents = Vector2(1400, 1400)
-spread = 180.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 1.0
-initial_velocity_max = 100.0
-angular_velocity_min = 10.0
-angular_velocity_max = 25.0
-scale_amount_min = 0.25
-scale_amount_max = 0.3
+[node name="Controllers" parent="CanvasLayer" instance=ExtResource("19_pb8c8")]
+offset_top = -193.0
 
 [node name="EnemySpawner" type="Node2D" parent="."]
 position = Vector2(225, -14)
@@ -458,11 +328,70 @@ script = ExtResource("9_8rtis")
 
 [node name="TargetShot" parent="." instance=ExtResource("26_0080p")]
 
+[node name="stars" type="Node2D" parent="."]
+visible = false
+
+[node name="stars1" type="CPUParticles2D" parent="stars"]
+position = Vector2(168, -116)
+scale = Vector2(0.16158, 0.1625)
+amount = 20
+lifetime = 8.0
+speed_scale = 0.5
+local_coords = true
+texture = ExtResource("2_lybst")
+emission_shape = 3
+emission_rect_extents = Vector2(1400, 1)
+spread = 90.0
+gravity = Vector2(0, 200)
+initial_velocity_min = 1.0
+initial_velocity_max = 100.0
+angular_velocity_min = 10.0
+angular_velocity_max = 25.0
+scale_amount_min = 0.25
+scale_amount_max = 0.3
+
+[node name="stars2" type="CPUParticles2D" parent="stars"]
+position = Vector2(165.001, -54)
+scale = Vector2(0.16158, 0.1625)
+amount = 10
+lifetime = 8.0
+speed_scale = 0.25
+local_coords = true
+texture = ExtResource("6_ihxsk")
+emission_shape = 3
+emission_rect_extents = Vector2(1400, 1)
+spread = 90.0
+gravity = Vector2(0, 200)
+initial_velocity_min = 1.0
+initial_velocity_max = 100.0
+angular_velocity_min = 10.0
+angular_velocity_max = 25.0
+scale_amount_min = 0.25
+scale_amount_max = 0.3
+
+[node name="stars3" type="CPUParticles2D" parent="stars"]
+position = Vector2(188, 263)
+scale = Vector2(0.16158, 0.1625)
+amount = 20
+lifetime = 2.0
+speed_scale = 0.5
+randomness = 1.0
+local_coords = true
+texture = ExtResource("6_ihxsk")
+emission_shape = 3
+emission_rect_extents = Vector2(1400, 1400)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 100.0
+angular_velocity_min = 10.0
+angular_velocity_max = 25.0
+scale_amount_min = 0.25
+scale_amount_max = 0.3
+
 [connection signal="pressed" from="CanvasLayer/GameOver/VBoxContainer/HBoxContainer/Retry" to="CanvasLayer/GameOver" method="_on_retry_pressed"]
 [connection signal="pressed" from="CanvasLayer/GameOver/VBoxContainer/HBoxContainer/About" to="CanvasLayer/GameOver" method="_on_about_pressed"]
 [connection signal="pressed" from="CanvasLayer/GameOver/VBoxContainer/HBoxContainer/Exit" to="CanvasLayer/GameOver" method="_on_exit_pressed"]
-[connection signal="pressed" from="CanvasLayer/GamePause/PauseButton" to="CanvasLayer/GamePause" method="_on_pause_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/GamePause/PlayButton" to="CanvasLayer/GamePause" method="_on_play_button_pressed"]
 [connection signal="timeout" from="EnemySpawner/spawnTimer" to="EnemySpawner" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="PowerUpsSpawner/spawnTimer" to="PowerUpsSpawner" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="MeteorSpawner/spawnTimer" to="MeteorSpawner" method="_on_spawn_timer_timeout"]
