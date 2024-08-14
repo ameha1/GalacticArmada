@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://80lc6hml3pk4"]
+
+[ext_resource type="Script" path="res://Scripts/GamePause.gd" id="1_tuuyb"]
+[ext_resource type="Texture2D" uid="uid://d4md4d44x5i63" path="res://Assets/UI/Sprites/transparent-dark/transparentDark06.png" id="2_mu2cv"]
+[ext_resource type="Texture2D" uid="uid://5m73u0woskea" path="res://Assets/UI/Sprites/line-light/lineLight12.png" id="3_as6wk"]
+[ext_resource type="Texture2D" uid="uid://c0b554yojxnie" path="res://Assets/UI/Sprites/line-light/lineLight14.png" id="4_82m4t"]
+
+[node name="GamePause" type="Control"]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 80.0
+grow_horizontal = 2
+script = ExtResource("1_tuuyb")
+
+[node name="PauseBG" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 570.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_mu2cv")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 16.0
+offset_bottom = 64.0
+grow_horizontal = 2
+alignment = 2
+
+[node name="PauseButton" type="TextureButton" parent="HBoxContainer"]
+layout_direction = 1
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("3_as6wk")
+
+[node name="PlayButton" type="TextureButton" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("4_82m4t")
+
+[connection signal="pressed" from="HBoxContainer/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
