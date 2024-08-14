@@ -1,12 +1,12 @@
-extends Control
+extends HBoxContainer
 
 @onready var player = $"../../Player"
 
-@onready var moveLeft = $MoveLeft
-@onready var moveRight = $MoveRight
-@onready var moveForward = $MoveForward
-@onready var shoot = $Shoot
-@onready var launch = $Launch
+@onready var moveLeft = $VBoxContainer/HBoxContainer/MoveLeft
+@onready var moveRight = $VBoxContainer/HBoxContainer/MoveRight
+@onready var moveForward = $VBoxContainer/HBoxContainer2/MoveForward
+@onready var shoot = $HBoxContainer/Shoot
+@onready var launch = $HBoxContainer/Launch
 
 func _physics_process(delta):
 	
@@ -20,5 +20,5 @@ func _physics_process(delta):
 		player.shoot()
 	if launch.button_pressed:
 		if Signals.missileLeft > 0:
-			player.activationMode = true
-                        player.missileLaunch()   
+			player.launchMode = true
+			player.launch_activation()
